@@ -5,11 +5,27 @@
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
 [node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
+position = Vector2(527, 291)
+scale = Vector2(0.8, 0.8)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=552329463]
+position = Vector2(585, 443)
+scale = Vector2(0.4, 0.4)
+metadata/_edit_group_ = true
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=721507100]
-polygon = PackedVector2Array(-355, 179, -363, 339, 454, 340, 456, -55, 239, -58, 235, 102, -366, 97)
+polygon = PackedVector2Array(892.4999, -1159.9999, 892.4999, -999.9999, -182.5, -1019.9999, -182.5, -632.4999, -1257.4999, -609.99994, -1267.4999, -1164.9999)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=140959922]
-polygon = PackedVector2Array(-355, 179, -363, 339, 454, 340, 456, -55, 239, -58, 235, 102, -366, 97)
+polygon = PackedVector2Array(892.4999, -1159.9999, 892.4999, -999.9999, -182.5, -1019.9999, -182.5, -632.4999, -1257.4999, -609.99994, -1267.4999, -1164.9999)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=960939049]
+position = Vector2(555, 277)
+scale = Vector2(0.4, 0.4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2" unique_id=994299788]
+polygon = PackedVector2Array(-355, 179, -363, 339, 454, 340, 457.5, -324.99994, 242.5, -324.99994, 235, 102, -366, 97)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2" unique_id=864353633]
+polygon = PackedVector2Array(-355, 179, -363, 339, 454, 340, 457.5, -324.99994, 242.5, -324.99994, 235, 102, -366, 97)

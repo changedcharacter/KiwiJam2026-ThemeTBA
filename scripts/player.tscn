@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpwqbreluol6h"]
 
-[ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="1_0s3u6"]
 [ext_resource type="Script" uid="uid://10e8vp60416q" path="res://scripts/player.gd" id="1_qm0ti"]
+[ext_resource type="Texture2D" uid="uid://bfmbhd4dhk4dx" path="res://assets/spider_idle.png" id="2_qm0ti"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qm0ti"]
 radius = 16.0
@@ -15,7 +15,19 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qm0ti")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1697446378]
-position = Vector2(0, -6)
-texture = ExtResource("1_0s3u6")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_qm0ti")
+hframes = 4
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
+[node name="Timer" type="Timer" parent="Sprite2D" unique_id=1260335044]
+wait_time = 0.15
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=93062322]
+target_position = Vector2(600, 0)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1700627591]
+visible = false
+z_index = -1
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
