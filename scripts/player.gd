@@ -7,7 +7,7 @@ extends CharacterBody2D
 const speed: float = 30.0
 const max_speed: float = 300.0
 const gravity = Vector2(0, 20.0)
-const jump_velocity: float = -400.0
+const jump_velocity: float = -500.0
 const max_fall_velocity: float = 400.0
 const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
