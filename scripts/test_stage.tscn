@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://diwmpepydgkem" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="2_sx7bb"]
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
-[ext_resource type="Texture2D" uid="uid://qjk01igokfif" path="res://assets/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="4_dfd7s"]
+[ext_resource type="PackedScene" path="res://scripts/hud.tscn" id="4_dfd7s"]
+[ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
 texture = ExtResource("2_sx7bb")
@@ -1126,34 +1127,13 @@ sources/1 = SubResource("TileSetAtlasSource_dfd7s")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7bb"]
 size = Vector2(1536, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dfd7s"]
-atlas = ExtResource("4_dfd7s")
-region = Rect2(0, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5mfmx"]
-atlas = ExtResource("4_dfd7s")
-region = Rect2(64, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_24n67"]
-atlas = ExtResource("4_dfd7s")
-region = Rect2(128, 0, 64, 80)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_r11g4"]
-atlas = ExtResource("4_dfd7s")
-region = Rect2(192, 0, 64, 80)
+atlas = ExtResource("5_24n67")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5mfmx"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dfd7s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5mfmx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_24n67")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r11g4")
 }],
@@ -1235,5 +1215,7 @@ position = Vector2(-107, -0.34500122)
 position = Vector2(0, -0.34500122)
 scale = Vector2(0.97437525, 0.9649998)
 target_position = Vector2(125, 0)
+
+[node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 
 [connection signal="timeout" from="Grasshopper/Timer" to="Grasshopper" method="_on_timer_timeout"]
