@@ -4,13 +4,14 @@ extends CharacterBody2D
 @onready var ray := $RayCast2D
 @onready var line := $Line2D
 
-const speed: float = 300.0
+const speed: float = 30.0
+const max_speed: float = 300.0
 const gravity = Vector2(0, 20.0)
 const jump_velocity: float = -400.0
 const max_fall_velocity: float = 400.0
 const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
-const grapple_damping: float = 0.05
+const grapple_damping: float = 0.02
 
 var jumped := false
 var grapple_hooked = false
@@ -30,14 +31,16 @@ func _physics_process(_delta: float) -> void:
 
 func _do_movement(direction):
 	if grapple_hooked:
-		var distance = global_position.distance_to(grapple_target)
-		if distance < grapple_length:
-			grapple_length = distance
+		var distance_to_target = global_position.distance_to(grapple_target)
+		var direction_to_target = global_position.direction_to(grapple_target)
+		velocity.x += speed * direction * -direction_to_target.y
+		if distance_to_target < grapple_length:
+			grapple_length = distance_to_target
 		else:
-			velocity += global_position.direction_to(grapple_target) * (distance - grapple_length) * (1 - grapple_damping)
-		velocity.x += 30 * direction
+			velocity += direction_to_target * (distance_to_target - grapple_length)
+		velocity *= 1 - grapple_damping
 	else:
-		velocity.x = speed * direction
+		velocity.x = move_toward(velocity.x, max_speed * direction, speed)
 	velocity += gravity
 	velocity.y = min(velocity.y, max_fall_velocity)
 	
