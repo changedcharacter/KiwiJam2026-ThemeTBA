@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var sprite_air := $Sprite2D
 @onready var ray := $RayCast2D
 @onready var line := $Line2D
+@onready var hitbox := $Hitbox
+@onready var hittimer := $HitTimer
 
 const speed: float = 30.0
 const max_speed: float = 300.0
@@ -14,12 +16,16 @@ const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
 const anim_swing_threshold: float = 150.0
+const kb_power: float = 1000.0
 
-var lives = 3
+var lives = 5
 var jumped := false
 var grapple_hooked = false
 var grapple_target: Vector2
 var grapple_length: float
+var kb_force = Vector2.ZERO
+
+signal hit
 
 func _physics_process(_delta: float) -> void:
 	ray.look_at(get_global_mouse_position())
@@ -44,6 +50,9 @@ func _do_movement(direction):
 		velocity *= 1 - grapple_damping
 	else:
 		velocity.x = move_toward(velocity.x, max_speed * direction, speed)
+	if kb_force.length() > 0:
+		velocity = kb_force
+		kb_force = Vector2.ZERO
 	velocity += gravity
 	velocity.y = min(velocity.y, max_fall_velocity)
 	
@@ -118,13 +127,23 @@ func _do_animation(direction):
 				# Moving almost-straight horizontal
 				sprite_air.frame = 5
 			else:
-				# Falling almost-straight down
+				# Falling diagonally down
 				sprite_air.frame = 6
 
-func lose_life():
-	lives -= 1
-	if lives < 0:
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if hittimer.is_stopped():
+		hittimer.start()
+		lives -= 1
+		emit_signal("hit")
+		var tween = create_tween()
+		for i in range(5):
+			tween.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.3)
+			tween.tween_property(sprite, "modulate", Color.WHITE, 0.3)
+	if lives <= 0:
 		game_over()
+	else:
+		var direction = global_position.direction_to(area.global_position)
+		kb_force = -kb_power * direction
 
 func game_over():
 	pass

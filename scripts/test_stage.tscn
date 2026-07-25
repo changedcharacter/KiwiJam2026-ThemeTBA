@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://diwmpepydgkem" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="2_sx7bb"]
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
-[ext_resource type="PackedScene" path="res://scripts/hud.tscn" id="4_dfd7s"]
+[ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
 [ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
@@ -1145,9 +1145,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
 size = Vector2(39, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
+size = Vector2(54, 30)
+
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
-[node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
+[node name="Player" parent="." unique_id=1352617234 groups=["player"] instance=ExtResource("1_ny0e7")]
 position = Vector2(-768, 440)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1426389600]
@@ -1215,6 +1218,14 @@ position = Vector2(-107, -0.34500122)
 position = Vector2(0, -0.34500122)
 scale = Vector2(0.97437525, 0.9649998)
 target_position = Vector2(125, 0)
+
+[node name="Area2D" type="Area2D" parent="Grasshopper" unique_id=1863616368]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper/Area2D" unique_id=139590096]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_24n67")
 
 [node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 
