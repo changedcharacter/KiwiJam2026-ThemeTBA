@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
 [ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
 [ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
+[ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="6_r11g4"]
+[ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="7_y4sb7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
 texture = ExtResource("2_sx7bb")
@@ -1143,7 +1145,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
-size = Vector2(39, 60)
+size = Vector2(39, 32.999985)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53n4j"]
+atlas = ExtResource("7_y4sb7")
+region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgqaa"]
+atlas = ExtResource("7_y4sb7")
+region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
 size = Vector2(54, 30)
@@ -1201,7 +1211,7 @@ sprite_frames = SubResource("SpriteFrames_5mfmx")
 frame_progress = 0.91183907
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper" unique_id=124062125]
-position = Vector2(0.19500732, -0.34500122)
+position = Vector2(0.19500732, 6.5)
 shape = SubResource("RectangleShape2D_5mfmx")
 
 [node name="Timer" type="Timer" parent="Grasshopper" unique_id=1100205851]
@@ -1214,10 +1224,29 @@ position = Vector2(219, -0.34500122)
 [node name="leftbnoound" type="Node2D" parent="Grasshopper" unique_id=550475699]
 position = Vector2(-107, -0.34500122)
 
-[node name="RayCast2D" type="RayCast2D" parent="Grasshopper" unique_id=689201478]
+[node name="player_detector" type="RayCast2D" parent="Grasshopper" unique_id=689201478]
 position = Vector2(0, -0.34500122)
 scale = Vector2(0.97437525, 0.9649998)
 target_position = Vector2(125, 0)
+
+[node name="Entangle_Mechanic" type="Node2D" parent="Grasshopper" unique_id=1622617653]
+script = ExtResource("6_r11g4")
+
+[node name="RayCast2DUp" type="RayCast2D" parent="Grasshopper/Entangle_Mechanic" unique_id=1184860408]
+target_position = Vector2(0, -150)
+collision_mask = 2
+
+[node name="RayCast2DDown" type="RayCast2D" parent="Grasshopper/Entangle_Mechanic" unique_id=379114890]
+target_position = Vector2(0, 150)
+collision_mask = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Grasshopper" unique_id=207608211]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 11.0
+offset_bottom = -11.0
+texture_under = SubResource("AtlasTexture_53n4j")
+texture_progress = SubResource("AtlasTexture_cgqaa")
 
 [node name="Area2D" type="Area2D" parent="Grasshopper" unique_id=1863616368]
 collision_layer = 2
