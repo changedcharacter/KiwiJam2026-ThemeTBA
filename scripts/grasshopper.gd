@@ -38,6 +38,7 @@ var current_state = States.WANDER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(target)
 	hop_timer.start()
 	sprite.play("default")
 	pass # Replace with function body.
@@ -49,10 +50,6 @@ func _physics_process(delta: float) -> void:
 		change_direction()
 		look_for_player()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-
-	pass
 
 func handle_movement(delta):
 	if current_state == States.WANDER:
@@ -119,16 +116,15 @@ func change_direction():
 		else:
 			direction = (target.position - self.position).normalized()
 			direction = sign(direction)
-			#print(direction)
+			print(direction)
 			if direction.x == 1.0:
 				#player is to the right
-				sprite.flip_h = false	
+				sprite.flip_h = true	
 				ray_cast.target_position = Vector2(125,0)
 			elif direction.x == -1.0:
 				#player is to the left
-				sprite.flip_h = true
-				ray_cast.target_position = Vector2(-125,0)
-			
+				sprite.flip_h = false	
+				ray_cast.target_position = Vector2(-125,0)		
 
 func die():
 	print("died")
@@ -152,7 +148,8 @@ func hop():
 	hop_state = true
 	hop_duration.start()
 
-
+func get_Player():
+	return target
 
 func _on_hop_duration_timeout() -> void:
 	hop_state = false

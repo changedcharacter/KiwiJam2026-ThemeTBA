@@ -3,11 +3,10 @@ extends Node2D
 @onready var down_ray = $RayCast2DDown
 @onready var up_point = $PointLight2D
 @onready var down_point = $PointLight2D2
-
 @onready var grass_hopper = $".."
 
 
-@onready var player =  $"../../Player"
+@onready var player = Global.current_player
 @onready var progress = $"../TextureProgressBar"
 @onready var loop_count = 0
 
@@ -23,7 +22,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var up_collider = up_ray.get_collider()
 	var down_collider = down_ray.get_collider()
-		
 	if up_collider == player:
 		up_point.visible = false
 		down_point.visible = true	
@@ -32,17 +30,18 @@ func _physics_process(delta: float) -> void:
 		count_loop()
 	
 	if down_collider == player:
-		up_point.visible = true
-		down_point.visible = false
-		down_ray.add_exception(player)
-		up_ray.remove_exception(player)
-		count_loop()
+		if player:
+			up_point.visible = true
+			down_point.visible = false
+			down_ray.add_exception(player)
+			up_ray.remove_exception(player)
+			count_loop()
 		
 	if loop_count >0 && progress :
 		progress.visible = true
 		
 func count_loop():
-	if progress:
+	if progress and player:
 		progress.value += 20
 		loop_count += 1
 		print(loop_count)
