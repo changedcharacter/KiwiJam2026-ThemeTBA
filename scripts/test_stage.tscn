@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
 [ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
-[ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
+[ext_resource type="Texture2D" uid="uid://dhpqsey5a6uge" path="res://assets/weta.png" id="5_y4sb7"]
+[ext_resource type="Texture2D" uid="uid://d0qjm8rijiy6j" path="res://assets/weta_entangled.png" id="6_53n4j"]
 [ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="6_r11g4"]
 [ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="7_y4sb7"]
 
@@ -1130,18 +1131,79 @@ sources/1 = SubResource("TileSetAtlasSource_dfd7s")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7bb"]
 size = Vector2(1536, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r11g4"]
-atlas = ExtResource("5_24n67")
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp1qi"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huu7r"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb8fm"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxj3y"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnacc"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq182"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b286u"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs83a"]
+atlas = ExtResource("5_y4sb7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulpax"]
+atlas = ExtResource("6_53n4j")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5mfmx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r11g4")
+"texture": SubResource("AtlasTexture_hp1qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huu7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxj3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnacc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq182")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b286u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs83a")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulpax")
+}],
+"loop": true,
+"name": &"webbed",
 "speed": 5.0
 }]
 
@@ -1205,10 +1267,10 @@ position = Vector2(53, 415)
 script = ExtResource("4_5mfmx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper" unique_id=1330016216]
-position = Vector2(0.19500732, -0.3449974)
-scale = Vector2(0.97437525, 0.9649998)
+position = Vector2(-1.9073486e-06, 7.0000124)
+scale = Vector2(1.1247656, 0.99273425)
 sprite_frames = SubResource("SpriteFrames_5mfmx")
-frame_progress = 0.91183907
+animation = &"webbed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper" unique_id=124062125]
 position = Vector2(0.19500732, 6.5)

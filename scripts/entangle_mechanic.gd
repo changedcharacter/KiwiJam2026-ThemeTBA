@@ -1,6 +1,7 @@
 extends Node2D
 @onready var up_ray= $RayCast2DUp
 @onready var down_ray = $RayCast2DDown
+@onready var grass_hopper = $".."
 
 
 @onready var player =  $"../../Player"
@@ -30,12 +31,14 @@ func _physics_process(delta: float) -> void:
 		up_ray.remove_exception(player)
 		count_loop()
 		
-	if loop_count >0 :
+	if loop_count >0 && progress :
 		progress.visible = true
 		
 func count_loop():
-	progress.value += 20
-	loop_count += 1
-	print(loop_count)
-	if loop_count == 5:
-		player.converge_trail(global_position)
+	if progress:
+		progress.value += 20
+		loop_count += 1
+		print(loop_count)
+		if progress.value == 100:
+			grass_hopper.die()
+			player.converge_trail(global_position)
