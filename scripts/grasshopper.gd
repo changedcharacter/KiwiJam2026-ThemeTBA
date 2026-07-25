@@ -23,8 +23,8 @@ const max_fall_velocity: float = 200.0
 
 @export var can_move = true
 
-@onready var right_bounds = $rightbound.position.x
-@onready var left_bounds = $leftbnoound.position.x
+@onready var right_bounds = self.position + Vector2(150,0)
+@onready var left_bounds = self.position + Vector2(-150,0)
 
 
 @onready var direction = Vector2.RIGHT
@@ -100,7 +100,7 @@ func change_direction():
 		if current_state == States.WANDER:
 			if sprite.flip_h:
 				#moving right
-				if self.position.x <= right_bounds:
+				if self.position.x <= right_bounds.x:
 					direction = Vector2.RIGHT
 				else:
 					direction = Vector2.LEFT
@@ -108,7 +108,7 @@ func change_direction():
 					ray_cast.target_position = Vector2(-125,0)
 			else:
 				#moving left
-				if self.position.x >= left_bounds:
+				if self.position.x >= left_bounds.x:
 					direction = Vector2.LEFT
 				else:
 					sprite.flip_h = true

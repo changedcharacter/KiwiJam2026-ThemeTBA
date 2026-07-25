@@ -1189,3 +1189,6 @@ shape = SubResource("RectangleShape2D_sx7bb")
 
 [node name="Grasshopper2" parent="." unique_id=1250482131 instance=ExtResource("10_hp1qi")]
 position = Vector2(240, 408)
+
+[node name="Grasshopper" parent="." unique_id=1880106891 instance=ExtResource("10_hp1qi")]
+position = Vector2(2466, 408)
