@@ -3,7 +3,7 @@ extends CharacterBody2D
 const max_speed: float = 600.0
 const accel: float = 2000.0
 const gravity: float = 1000.0
-const jump_velocity: float = -800.0
+const jump_velocity: float = -300.0
 const max_fall_velocity: float = 800.0
 
 func _physics_process(delta: float) -> void:

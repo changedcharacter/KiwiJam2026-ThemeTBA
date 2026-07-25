@@ -19,3 +19,4 @@ position = Vector2(0, -6)
 texture = ExtResource("1_0s3u6")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
+enabled = false
