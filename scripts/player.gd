@@ -33,7 +33,7 @@ func _do_movement(direction):
 	if grapple_hooked:
 		var distance_to_target = global_position.distance_to(grapple_target)
 		var direction_to_target = global_position.direction_to(grapple_target)
-		velocity.x += speed * direction * -direction_to_target.y
+		velocity.x += speed * direction * abs(direction_to_target.y)
 		if distance_to_target < grapple_length:
 			grapple_length = distance_to_target
 		else:
