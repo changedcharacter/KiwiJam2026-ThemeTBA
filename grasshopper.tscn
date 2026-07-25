@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://cohoofblo028r"]
+
+[ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="1_6adcc"]
+[ext_resource type="Texture2D" uid="uid://dhpqsey5a6uge" path="res://assets/weta.png" id="2_0mqij"]
+[ext_resource type="Texture2D" uid="uid://d0qjm8rijiy6j" path="res://assets/weta_entangled.png" id="3_l3lye"]
+[ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="4_yuuun"]
+[ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="5_otetp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp1qi"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huu7r"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb8fm"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxj3y"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnacc"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq182"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b286u"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs83a"]
+atlas = ExtResource("2_0mqij")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulpax"]
+atlas = ExtResource("3_l3lye")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5mfmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp1qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huu7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxj3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnacc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq182")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b286u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs83a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulpax")
+}],
+"loop": true,
+"name": &"webbed",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
+size = Vector2(39, 32.999985)
+
+[sub_resource type="Gradient" id="Gradient_hp1qi"]
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_huu7r"]
+gradient = SubResource("Gradient_hp1qi")
+fill = 1
+fill_from = Vector2(0.53999996, 0.63)
+fill_to = Vector2(0.53, 0.98999995)
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53n4j"]
+atlas = ExtResource("5_otetp")
+region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgqaa"]
+atlas = ExtResource("5_otetp")
+region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
+size = Vector2(54, 30)
+
+[node name="Grasshopper" type="CharacterBody2D" unique_id=1250482131]
+script = ExtResource("1_6adcc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=599075512]
+position = Vector2(-1.9073486e-06, 7.0000124)
+scale = Vector2(1.1247656, 0.99273425)
+sprite_frames = SubResource("SpriteFrames_5mfmx")
+animation = &"webbed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=503461740]
+position = Vector2(0.19500732, 6.5)
+shape = SubResource("RectangleShape2D_5mfmx")
+
+[node name="HopTimer" type="Timer" parent="." unique_id=1624816310]
+wait_time = 3.0
+
+[node name="HopDuration" type="Timer" parent="HopTimer" unique_id=1092048225]
+wait_time = 0.3
+one_shot = true
+
+[node name="Timer" type="Timer" parent="." unique_id=181682736]
+wait_time = 5.0
+one_shot = true
+
+[node name="rightbound" type="Node2D" parent="." unique_id=1782294160]
+position = Vector2(154, 0)
+
+[node name="leftbnoound" type="Node2D" parent="." unique_id=900246457]
+position = Vector2(-161, 0)
+
+[node name="player_detector" type="RayCast2D" parent="." unique_id=1393065244]
+position = Vector2(0, -0.34500122)
+scale = Vector2(0.97437525, 0.9649998)
+target_position = Vector2(-125, 0)
+
+[node name="Entangle_Mechanic" type="Node2D" parent="." unique_id=1131550389]
+script = ExtResource("4_yuuun")
+
+[node name="RayCast2DUp" type="RayCast2D" parent="Entangle_Mechanic" unique_id=461793964]
+target_position = Vector2(0, -150)
+
+[node name="RayCast2DDown" type="RayCast2D" parent="Entangle_Mechanic" unique_id=868271611]
+target_position = Vector2(0, 150)
+
+[node name="PointLight2D" type="PointLight2D" parent="Entangle_Mechanic" unique_id=8105921]
+position = Vector2(-3.000001, -13.999999)
+scale = Vector2(1.4531249, 1.5625)
+energy = 4.04
+texture = SubResource("GradientTexture2D_huu7r")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Entangle_Mechanic" unique_id=1811950373]
+position = Vector2(-4, 7.999999)
+scale = Vector2(1.4531249, 1.5625)
+energy = 4.04
+texture = SubResource("GradientTexture2D_huu7r")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=476714125]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 11.0
+offset_bottom = -11.0
+texture_under = SubResource("AtlasTexture_53n4j")
+texture_progress = SubResource("AtlasTexture_cgqaa")
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=861435513]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1501734230]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_24n67")
+
+[connection signal="timeout" from="HopTimer" to="." method="_on_hop_timer_timeout"]
+[connection signal="timeout" from="HopTimer/HopDuration" to="." method="_on_hop_duration_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
