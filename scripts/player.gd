@@ -3,9 +3,10 @@ extends CharacterBody2D
 @onready var sprite := $AnimatedSprite2D
 @onready var sprite_air := $Sprite2D
 @onready var ray := $RayCast2D
-@onready var line := $Line2D
+@onready var line := $Grapple
 @onready var hitbox := $Hitbox
 @onready var hittimer := $HitTimer
+@onready var trail := $Trail
 
 const speed: float = 30.0
 const max_speed: float = 300.0
@@ -17,6 +18,8 @@ const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
 const anim_swing_threshold: float = 150.0
 const kb_power: float = 1000.0
+const max_trail_points: int = 300
+const converge_line = preload("res://scripts/converge.tscn")
 
 var lives = 5
 var jumped := false
@@ -24,8 +27,15 @@ var grapple_hooked = false
 var grapple_target: Vector2
 var grapple_length: float
 var kb_force = Vector2.ZERO
+var queue: Array = []
+var queue_drift: Array = []
 
 signal hit
+
+func _ready() -> void:
+	for i in range(200):
+		var angle = i*2*PI/200
+		queue_drift.push_back(0.1*Vector2(sin(2*angle), cos(angle)))
 
 func _physics_process(_delta: float) -> void:
 	ray.look_at(get_global_mouse_position())
@@ -35,6 +45,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_released("grapple"):
 		_retract_grapple()
 	_update_grapple()
+	_do_trail()
 	_do_movement(direction)
 	_do_animation(direction)
 
@@ -129,6 +140,23 @@ func _do_animation(direction):
 			else:
 				# Falling diagonally down
 				sprite_air.frame = 6
+
+func _do_trail():
+	queue.push_front(global_position)
+	if queue.size() > max_trail_points: queue.pop_back()
+	trail.clear_points()
+	for index in range(queue.size()):
+		var drift_index = (index + queue.size()) % queue_drift.size()
+		var point = queue[index] + queue_drift[drift_index]
+		queue[index] = point
+		trail.add_point(point)
+
+func converge_trail(target: Vector2):
+	var converge = converge_line.instantiate()
+	converge.points = queue
+	converge.target = target
+	add_child(converge)
+	queue = []
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if hittimer.is_stopped():
