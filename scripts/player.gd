@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var sprite := $Sprite2D
+@onready var sprite := $AnimatedSprite2D
 @onready var ray := $RayCast2D
 @onready var line := $Line2D
 
@@ -72,8 +72,8 @@ func _update_grapple():
 	grapple_length = max(min_grapple_length, grapple_length - grapple_reel_in_rate)
 
 func _do_animation(direction):
-	if direction > 0: sprite.flip_h = false
-	elif direction < 0: sprite.flip_h = true
-	if $Sprite2D/Timer.is_stopped():
-		sprite.frame = (sprite.frame + 1) % sprite.hframes
-		$Sprite2D/Timer.start()
+	if direction: 
+		sprite.flip_h = direction < 0
+		sprite.animation = "move"
+	else:
+		sprite.animation = "idle"
