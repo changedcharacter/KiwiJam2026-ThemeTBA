@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sprite := $AnimatedSprite2D
+@onready var sprite_air := $Sprite2D
 @onready var ray := $RayCast2D
 @onready var line := $Line2D
 
@@ -12,6 +13,7 @@ const max_fall_velocity: float = 400.0
 const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
+const anim_swing_threshold: float = 40.0
 
 var jumped := false
 var grapple_hooked = false
@@ -72,8 +74,35 @@ func _update_grapple():
 	grapple_length = max(min_grapple_length, grapple_length - grapple_reel_in_rate)
 
 func _do_animation(direction):
-	if direction: 
-		sprite.flip_h = direction < 0
-		sprite.animation = "move"
+	if is_on_floor():
+		sprite.show()
+		sprite_air.hide()
+		if direction:
+			sprite.flip_h = direction < 0
+			sprite.animation = "move"
+		else:
+			sprite.animation = "idle"
 	else:
-		sprite.animation = "idle"
+		sprite.hide()
+		sprite_air.show()
+		sprite_air.flip_h = velocity.x < 0
+		if abs(velocity.x) < anim_swing_threshold:
+			if velocity.y < -anim_swing_threshold:
+				# Rising almost-straight up
+				sprite_air.frame = 4
+			elif velocity.y < anim_swing_threshold:
+				# Almost unmoving
+				sprite_air.frame = 5
+			else:
+				# Falling almost-straight down
+				sprite_air.frame = 7
+		else:
+			if velocity.y < -anim_swing_threshold:
+				# Rising diagonally up
+				sprite_air.frame = 3
+			elif velocity.y < anim_swing_threshold:
+				# Moving almost-straight horizontal
+				sprite_air.frame = 5
+			else:
+				# Falling almost-straight down
+				sprite_air.frame = 6
