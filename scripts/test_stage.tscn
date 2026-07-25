@@ -1217,7 +1217,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_sx7bb")
 
 [node name="Grasshopper" type="CharacterBody2D" parent="." unique_id=2092748618]
-position = Vector2(1114, 378)
+position = Vector2(345, 401)
 script = ExtResource("4_5mfmx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper" unique_id=1330016216]
@@ -1280,68 +1280,6 @@ shape = SubResource("RectangleShape2D_24n67")
 
 [node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 
-[node name="Grasshopper2" type="CharacterBody2D" parent="." unique_id=896071331]
-position = Vector2(84, 428)
-script = ExtResource("4_5mfmx")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper2" unique_id=621017934]
-position = Vector2(0.19500732, -0.3449974)
-scale = Vector2(0.97437525, 0.9649998)
-sprite_frames = SubResource("SpriteFrames_5mfmx")
-frame_progress = 0.91183907
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper2" unique_id=141476389]
-position = Vector2(0.19500732, 6.5)
-shape = SubResource("RectangleShape2D_5mfmx")
-
-[node name="HopTimer" type="Timer" parent="Grasshopper2" unique_id=857591018]
-wait_time = 3.0
-
-[node name="HopDuration" type="Timer" parent="Grasshopper2/HopTimer" unique_id=207225415]
-wait_time = 0.3
-one_shot = true
-
-[node name="Timer" type="Timer" parent="Grasshopper2" unique_id=260368109]
-wait_time = 5.0
-one_shot = true
-
-[node name="rightbound" type="Node2D" parent="Grasshopper2" unique_id=1272956864]
-position = Vector2(113, 34)
-
-[node name="leftbnoound" type="Node2D" parent="Grasshopper2" unique_id=766463458]
-position = Vector2(-102, 34)
-
-[node name="player_detector" type="RayCast2D" parent="Grasshopper2" unique_id=951908032]
-position = Vector2(0, -0.34500122)
-scale = Vector2(0.97437525, 0.9649998)
-target_position = Vector2(125, 0)
-
-[node name="Entangle_Mechanic" type="Node2D" parent="Grasshopper2" unique_id=498875253]
-script = ExtResource("6_r11g4")
-
-[node name="RayCast2DUp" type="RayCast2D" parent="Grasshopper2/Entangle_Mechanic" unique_id=996374091]
-target_position = Vector2(0, -150)
-
-[node name="RayCast2DDown" type="RayCast2D" parent="Grasshopper2/Entangle_Mechanic" unique_id=1518810241]
-target_position = Vector2(0, 150)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Grasshopper2" unique_id=229813152]
-offset_left = -11.0
-offset_top = -33.0
-offset_right = 11.0
-offset_bottom = -11.0
-texture_under = SubResource("AtlasTexture_53n4j")
-texture_progress = SubResource("AtlasTexture_cgqaa")
-metadata/_edit_use_anchors_ = true
-
-[node name="Area2D" type="Area2D" parent="Grasshopper2" unique_id=1471303810]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper2/Area2D" unique_id=1799957741]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_24n67")
-
 [node name="WaspPlaceholder3" type="Sprite2D" parent="." unique_id=913578243]
 position = Vector2(2373, 358)
 scale = Vector2(0.05710078, 0.069278285)
@@ -1352,139 +1290,6 @@ position = Vector2(2532, 363)
 scale = Vector2(0.05710078, 0.069278285)
 texture = ExtResource("4_53n4j")
 
-[node name="Grasshopper3" type="CharacterBody2D" parent="." unique_id=211309045]
-position = Vector2(2546, 433)
-script = ExtResource("4_5mfmx")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper3" unique_id=326821614]
-position = Vector2(0.19500732, -0.3449974)
-scale = Vector2(0.97437525, 0.9649998)
-sprite_frames = SubResource("SpriteFrames_5mfmx")
-frame_progress = 0.91183907
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper3" unique_id=999593698]
-position = Vector2(0.19500732, 6.5)
-shape = SubResource("RectangleShape2D_5mfmx")
-
-[node name="HopTimer" type="Timer" parent="Grasshopper3" unique_id=1730710155]
-wait_time = 3.0
-
-[node name="HopDuration" type="Timer" parent="Grasshopper3/HopTimer" unique_id=396547766]
-wait_time = 0.3
-one_shot = true
-
-[node name="Timer" type="Timer" parent="Grasshopper3" unique_id=1881089142]
-wait_time = 5.0
-one_shot = true
-
-[node name="rightbound" type="Node2D" parent="Grasshopper3" unique_id=1651430748]
-position = Vector2(113, 34)
-
-[node name="leftbnoound" type="Node2D" parent="Grasshopper3" unique_id=1674562494]
-position = Vector2(-102, 34)
-
-[node name="player_detector" type="RayCast2D" parent="Grasshopper3" unique_id=619835075]
-position = Vector2(0, -0.34500122)
-scale = Vector2(0.97437525, 0.9649998)
-target_position = Vector2(125, 0)
-
-[node name="Entangle_Mechanic" type="Node2D" parent="Grasshopper3" unique_id=1111607515]
-script = ExtResource("6_r11g4")
-
-[node name="RayCast2DUp" type="RayCast2D" parent="Grasshopper3/Entangle_Mechanic" unique_id=1411941155]
-target_position = Vector2(0, -150)
-
-[node name="RayCast2DDown" type="RayCast2D" parent="Grasshopper3/Entangle_Mechanic" unique_id=1509220268]
-target_position = Vector2(0, 150)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Grasshopper3" unique_id=1019130760]
-offset_left = -11.0
-offset_top = -33.0
-offset_right = 11.0
-offset_bottom = -11.0
-texture_under = SubResource("AtlasTexture_53n4j")
-texture_progress = SubResource("AtlasTexture_cgqaa")
-metadata/_edit_use_anchors_ = true
-
-[node name="Area2D" type="Area2D" parent="Grasshopper3" unique_id=583949034]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper3/Area2D" unique_id=694036537]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_24n67")
-
-[node name="Grasshopper4" type="CharacterBody2D" parent="." unique_id=1472075738]
-position = Vector2(2250, 435)
-script = ExtResource("4_5mfmx")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper4" unique_id=1640545371]
-position = Vector2(0.19500732, -0.3449974)
-scale = Vector2(0.97437525, 0.9649998)
-sprite_frames = SubResource("SpriteFrames_5mfmx")
-frame_progress = 0.91183907
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper4" unique_id=793342534]
-position = Vector2(0.19500732, 6.5)
-shape = SubResource("RectangleShape2D_5mfmx")
-
-[node name="HopTimer" type="Timer" parent="Grasshopper4" unique_id=373713295]
-wait_time = 3.0
-
-[node name="HopDuration" type="Timer" parent="Grasshopper4/HopTimer" unique_id=1258418073]
-wait_time = 0.3
-one_shot = true
-
-[node name="Timer" type="Timer" parent="Grasshopper4" unique_id=376406696]
-wait_time = 5.0
-one_shot = true
-
-[node name="rightbound" type="Node2D" parent="Grasshopper4" unique_id=1152614648]
-position = Vector2(113, 34)
-
-[node name="leftbnoound" type="Node2D" parent="Grasshopper4" unique_id=1862726360]
-position = Vector2(-102, 34)
-
-[node name="player_detector" type="RayCast2D" parent="Grasshopper4" unique_id=913673777]
-position = Vector2(0, -0.34500122)
-scale = Vector2(0.97437525, 0.9649998)
-target_position = Vector2(125, 0)
-
-[node name="Entangle_Mechanic" type="Node2D" parent="Grasshopper4" unique_id=518658107]
-script = ExtResource("6_r11g4")
-
-[node name="RayCast2DUp" type="RayCast2D" parent="Grasshopper4/Entangle_Mechanic" unique_id=1956696182]
-target_position = Vector2(0, -150)
-
-[node name="RayCast2DDown" type="RayCast2D" parent="Grasshopper4/Entangle_Mechanic" unique_id=42524117]
-target_position = Vector2(0, 150)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Grasshopper4" unique_id=845529583]
-offset_left = -11.0
-offset_top = -33.0
-offset_right = 11.0
-offset_bottom = -11.0
-texture_under = SubResource("AtlasTexture_53n4j")
-texture_progress = SubResource("AtlasTexture_cgqaa")
-metadata/_edit_use_anchors_ = true
-
-[node name="Area2D" type="Area2D" parent="Grasshopper4" unique_id=1064416257]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper4/Area2D" unique_id=1403887680]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_24n67")
-
 [connection signal="timeout" from="Grasshopper/HopTimer" to="Grasshopper" method="_on_hop_timer_timeout"]
 [connection signal="timeout" from="Grasshopper/HopTimer/HopDuration" to="Grasshopper" method="_on_hop_duration_timeout"]
 [connection signal="timeout" from="Grasshopper/Timer" to="Grasshopper" method="_on_timer_timeout"]
-[connection signal="timeout" from="Grasshopper2/HopTimer" to="Grasshopper2" method="_on_hop_timer_timeout"]
-[connection signal="timeout" from="Grasshopper2/HopTimer/HopDuration" to="Grasshopper2" method="_on_hop_duration_timeout"]
-[connection signal="timeout" from="Grasshopper2/Timer" to="Grasshopper2" method="_on_timer_timeout"]
-[connection signal="timeout" from="Grasshopper3/HopTimer" to="Grasshopper3" method="_on_hop_timer_timeout"]
-[connection signal="timeout" from="Grasshopper3/HopTimer/HopDuration" to="Grasshopper3" method="_on_hop_duration_timeout"]
-[connection signal="timeout" from="Grasshopper3/Timer" to="Grasshopper3" method="_on_timer_timeout"]
-[connection signal="timeout" from="Grasshopper4/HopTimer" to="Grasshopper4" method="_on_hop_timer_timeout"]
-[connection signal="timeout" from="Grasshopper4/HopTimer/HopDuration" to="Grasshopper4" method="_on_hop_duration_timeout"]
-[connection signal="timeout" from="Grasshopper4/Timer" to="Grasshopper4" method="_on_timer_timeout"]
