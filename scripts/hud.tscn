@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dfavxaurfo7g7"]
+
+[ext_resource type="Script" uid="uid://l568l06imlit" path="res://scripts/hud.gd" id="1_yw0i7"]
+
+[node name="HUD" type="CanvasLayer" unique_id=548398503]
+script = ExtResource("1_yw0i7")
+
+[node name="LivesLabel" type="Label" parent="." unique_id=1131354508]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 177.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 32
+text = "Lives: 1"
+
+[node name="EnemyLabel" type="Label" parent="." unique_id=1751786378]
+offset_left = 64.0
+offset_top = 100.0
+offset_right = 240.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 24
+text = "Enemies Left: 0"
+
+[node name="PausePanel" type="Panel" parent="." unique_id=1479576362]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PausePanel" unique_id=199251227]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PausePanel" unique_id=1235907955]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Resume
+"
+
+[node name="ExitButton" type="Button" parent="PausePanel" unique_id=2069833534]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 50.0
+offset_right = 80.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Exit Game"
+
+[node name="TweenTimer" type="Timer" parent="PausePanel" unique_id=487596587]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="pressed" from="PausePanel/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PausePanel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="timeout" from="PausePanel/TweenTimer" to="." method="_on_tween_timer_timeout"]
