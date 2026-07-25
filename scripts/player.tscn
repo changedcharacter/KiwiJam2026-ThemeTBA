@@ -198,7 +198,6 @@ animations = [{
 size = Vector2(52, 36)
 
 [node name="Player" type="CharacterBody2D" unique_id=1352617234 groups=["player"]]
-collision_layer = 3
 script = ExtResource("1_qm0ti")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=694805318]
@@ -207,6 +206,7 @@ shape = SubResource("CapsuleShape2D_qm0ti")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=93062322]
 target_position = Vector2(600, 0)
+collision_mask = 4
 
 [node name="Grapple" type="Line2D" parent="." unique_id=1700627591]
 visible = false
@@ -217,7 +217,6 @@ texture = ExtResource("2_38am0")
 texture_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
-enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1141997585]
 sprite_frames = SubResource("SpriteFrames_ahudb")
@@ -241,6 +240,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Trail" type="Line2D" parent="." unique_id=617577570]
+self_modulate = Color(1, 1, 1, 0.49803922)
 top_level = true
 z_index = -2
 width = 6.0
