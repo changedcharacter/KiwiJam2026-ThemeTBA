@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cpwqbreluol6h"]
+
+[ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="1_0s3u6"]
+[ext_resource type="Script" uid="uid://10e8vp60416q" path="res://scripts/player.gd" id="1_qm0ti"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qm0ti"]
+radius = 16.0
+height = 48.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1352617234]
+script = ExtResource("1_qm0ti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=694805318]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qm0ti")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1697446378]
+position = Vector2(0, -6)
+texture = ExtResource("1_0s3u6")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
