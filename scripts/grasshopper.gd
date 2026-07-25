@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @onready var target = $"../Player"
 @onready var sprite = $AnimatedSprite2D
-@onready var ray_cast = $RayCast2D
+@onready var ray_cast = $player_detector
 @onready var timer = $Timer
 
 
@@ -12,6 +12,8 @@ var chase_speed = 90
 var acceleration = 300
 const max_fall_velocity: float = 400.0
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@export var can_move = true
 
 @onready var right_bounds = $rightbound.position.x
 @onready var left_bounds = $leftbnoound.position.x
@@ -31,9 +33,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	handle_movement(delta)
-	change_direction()
-	look_for_player()
+	if can_move:
+		handle_movement(delta)
+		change_direction()
+		look_for_player()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -90,12 +93,10 @@ func change_direction():
 		direction = sign(direction)
 		print(direction)
 		if direction.x == 1.0:
-			print("player to the right")
 			#player is to the right
 			sprite.flip_h = false
 			ray_cast.target_position = Vector2(125,0)
 		elif direction.x == -1.0:
-			print("player to the left")
 			#player is to the left
 			sprite.flip_h = true
 			ray_cast.target_position = Vector2(-125,0)
