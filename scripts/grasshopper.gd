@@ -88,14 +88,14 @@ func change_direction():
 	else:
 		direction = (target.position - self.position).normalized()
 		direction = sign(direction)
-		print(direction)
+		#print(direction)
 		if direction.x == 1.0:
-			print("player to the right")
+			#print("player to the right")
 			#player is to the right
 			sprite.flip_h = false
 			ray_cast.target_position = Vector2(125,0)
 		elif direction.x == -1.0:
-			print("player to the left")
+			#print("player to the left")
 			#player is to the left
 			sprite.flip_h = true
 			ray_cast.target_position = Vector2(-125,0)
