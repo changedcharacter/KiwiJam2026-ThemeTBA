@@ -14,7 +14,7 @@ var chase_speed = 60
 var acceleration = 300
 
 @onready var hop_state = false
-var jumpspeed_x = 15
+var jumpspeed_x = -15
 var jumpspeed_y = -45
 const max_fall_velocity: float = 200.0
 
@@ -32,12 +32,14 @@ const max_fall_velocity: float = 200.0
 enum States{
 	WANDER,
 	CHASE,
+	DEAD
 }
 var current_state = States.WANDER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hop_timer.start()
+	sprite.play("default")
 	pass # Replace with function body.
 
 
@@ -55,29 +57,37 @@ func _process(delta: float) -> void:
 func handle_movement(delta):
 	if current_state == States.WANDER:
 		velocity = velocity.move_toward(direction*speed, acceleration * delta)
-	else:
+	elif current_state == States.CHASE:
 		velocity = velocity.move_toward(direction*chase_speed, acceleration * delta)
+	elif current_state == States.DEAD:
+		hop_state = false
+		hop_timer.stop()
+		hop_duration.stop()
+		timer.stop()
+		velocity.x = 0
+		velocity.y += 30
 		
 	if hop_state == true:
 		velocity.y += jumpspeed_y
-		if sprite.flip_h == true:
-			velocity.x -= jumpspeed_x
-		else:
+		if sprite.flip_h == false:
 			velocity.x += jumpspeed_x
+		else:
+			velocity.x -= jumpspeed_x
 	velocity += Vector2(0,20)
 	velocity.y = min(velocity.y, max_fall_velocity)
 	move_and_slide()
 	
 func look_for_player():
-	if ray_cast.is_colliding():
-		var collider = ray_cast.get_collider()
-		if collider == target:
-			chase_player()
+	if !current_state == States.DEAD:
+		if ray_cast.is_colliding():
+			var collider = ray_cast.get_collider()
+			if collider == target:
+				chase_player()
+			elif current_state == States.CHASE:
+				stop_chase()
+				pass
 		elif current_state == States.CHASE:
 			stop_chase()
-			pass
-	elif current_state == States.CHASE:
-		stop_chase()
 
 func chase_player():
 	timer.start()
@@ -89,36 +99,44 @@ func stop_chase():
 		timer.stop()	
 
 func change_direction():
-	if current_state == States.WANDER:
-		if !sprite.flip_h:
-			#moving right
-			if self.position.x <= right_bounds:
-				direction = Vector2.RIGHT
+	if !current_state == States.DEAD: 
+		if current_state == States.WANDER:
+			if sprite.flip_h:
+				#moving right
+				if self.position.x <= right_bounds:
+					direction = Vector2.RIGHT
+				else:
+					direction = Vector2.LEFT
+					sprite.flip_h = false	
+					ray_cast.target_position = Vector2(-125,0)
 			else:
-				direction = Vector2.LEFT
+				#moving left
+				if self.position.x >= left_bounds:
+					direction = Vector2.LEFT
+				else:
+					sprite.flip_h = true
+					ray_cast.target_position = Vector2(125,0)
+		else:
+			direction = (target.position - self.position).normalized()
+			direction = sign(direction)
+			#print(direction)
+			if direction.x == 1.0:
+				#player is to the right
+				sprite.flip_h = false	
+				ray_cast.target_position = Vector2(125,0)
+			elif direction.x == -1.0:
+				#player is to the left
 				sprite.flip_h = true
 				ray_cast.target_position = Vector2(-125,0)
-		else:
-			#moving left
-			if self.position.x >= left_bounds:
-				direction = Vector2.LEFT
-			else:
-				sprite.flip_h = false
-				ray_cast.target_position = Vector2(125,0)
-	else:
-		direction = (target.position - self.position).normalized()
-		direction = sign(direction)
-		#print(direction)
-		if direction.x == 1.0:
-			#player is to the right
-			sprite.flip_h = false
-			ray_cast.target_position = Vector2(125,0)
-		elif direction.x == -1.0:
-			#player is to the left
-			sprite.flip_h = true
-			ray_cast.target_position = Vector2(-125,0)
 			
-			
+
+func die():
+	print("died")
+	sprite.play("webbed")
+	current_state = States.DEAD
+	$TextureProgressBar.queue_free()
+	
+	pass
 			
 func _on_timer_timeout() -> void:
 	current_state = States.WANDER
@@ -126,7 +144,6 @@ func _on_timer_timeout() -> void:
 
 
 func _on_hop_timer_timeout() -> void:
-	print("hop")
 	hop()
 	
 	pass # Replace with function body.
@@ -134,7 +151,7 @@ func _on_hop_timer_timeout() -> void:
 func hop():
 	hop_state = true
 	hop_duration.start()
-	
+
 
 
 func _on_hop_duration_timeout() -> void:
