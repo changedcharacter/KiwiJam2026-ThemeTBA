@@ -5,12 +5,20 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var ray_cast = $player_detector
 @onready var timer = $Timer
+@onready var hop_timer = $HopTimer
+@onready var hop_duration = $HopTimer/HopDuration
 
 
-var speed = 30
-var chase_speed = 90
+var speed = 20
+var chase_speed = 60
 var acceleration = 300
-const max_fall_velocity: float = 400.0
+
+@onready var hop_state = false
+var jumpspeed_x = 15
+var jumpspeed_y = -45
+const max_fall_velocity: float = 200.0
+
+
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var can_move = true
@@ -23,12 +31,13 @@ const max_fall_velocity: float = 400.0
 
 enum States{
 	WANDER,
-	CHASE
+	CHASE,
 }
 var current_state = States.WANDER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hop_timer.start()
 	pass # Replace with function body.
 
 
@@ -48,7 +57,15 @@ func handle_movement(delta):
 		velocity = velocity.move_toward(direction*speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(direction*chase_speed, acceleration * delta)
+		
+	if hop_state == true:
+		velocity.y += jumpspeed_y
+		if sprite.flip_h == true:
+			velocity.x -= jumpspeed_x
+		else:
+			velocity.x += jumpspeed_x
 	velocity += Vector2(0,20)
+	velocity.y = min(velocity.y, max_fall_velocity)
 	move_and_slide()
 	
 func look_for_player():
@@ -105,4 +122,22 @@ func change_direction():
 			
 func _on_timer_timeout() -> void:
 	current_state = States.WANDER
+	pass # Replace with function body.
+
+
+func _on_hop_timer_timeout() -> void:
+	print("hop")
+	hop()
+	
+	pass # Replace with function body.
+
+func hop():
+	hop_state = true
+	hop_duration.start()
+	
+
+
+func _on_hop_duration_timeout() -> void:
+	hop_state = false
+	hop_timer.start()
 	pass # Replace with function body.

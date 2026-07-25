@@ -1160,7 +1160,7 @@ size = Vector2(54, 30)
 
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
-[node name="Player" parent="." unique_id=1352617234 groups=["player"] instance=ExtResource("1_ny0e7")]
+[node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
 position = Vector2(-768, 440)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1426389600]
@@ -1201,7 +1201,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_sx7bb")
 
 [node name="Grasshopper" type="CharacterBody2D" parent="." unique_id=2092748618]
-position = Vector2(107, 402)
+position = Vector2(53, 415)
 script = ExtResource("4_5mfmx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper" unique_id=1330016216]
@@ -1214,15 +1214,22 @@ frame_progress = 0.91183907
 position = Vector2(0.19500732, 6.5)
 shape = SubResource("RectangleShape2D_5mfmx")
 
+[node name="HopTimer" type="Timer" parent="Grasshopper" unique_id=1070507135]
+wait_time = 3.0
+
+[node name="HopDuration" type="Timer" parent="Grasshopper/HopTimer" unique_id=1048664735]
+wait_time = 0.3
+one_shot = true
+
 [node name="Timer" type="Timer" parent="Grasshopper" unique_id=1100205851]
 wait_time = 5.0
 one_shot = true
 
 [node name="rightbound" type="Node2D" parent="Grasshopper" unique_id=1293829403]
-position = Vector2(219, -0.34500122)
+position = Vector2(113, 34)
 
 [node name="leftbnoound" type="Node2D" parent="Grasshopper" unique_id=550475699]
-position = Vector2(-107, -0.34500122)
+position = Vector2(-102, 34)
 
 [node name="player_detector" type="RayCast2D" parent="Grasshopper" unique_id=689201478]
 position = Vector2(0, -0.34500122)
@@ -1247,6 +1254,7 @@ offset_right = 11.0
 offset_bottom = -11.0
 texture_under = SubResource("AtlasTexture_53n4j")
 texture_progress = SubResource("AtlasTexture_cgqaa")
+metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="Grasshopper" unique_id=1863616368]
 collision_layer = 2
@@ -1258,4 +1266,6 @@ shape = SubResource("RectangleShape2D_24n67")
 
 [node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 
+[connection signal="timeout" from="Grasshopper/HopTimer" to="Grasshopper" method="_on_hop_timer_timeout"]
+[connection signal="timeout" from="Grasshopper/HopTimer/HopDuration" to="Grasshopper" method="_on_hop_duration_timeout"]
 [connection signal="timeout" from="Grasshopper/Timer" to="Grasshopper" method="_on_timer_timeout"]
