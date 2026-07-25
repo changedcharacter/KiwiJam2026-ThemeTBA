@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://10e8vp60416q" path="res://scripts/player.gd" id="1_qm0ti"]
 [ext_resource type="Texture2D" uid="uid://bk80vj1qnymu0" path="res://assets/spider_dangle.png" id="2_0jhex"]
+[ext_resource type="Texture2D" uid="uid://dti1i5cf0sh31" path="res://assets/string.png" id="2_38am0"]
 [ext_resource type="Texture2D" uid="uid://bfmbhd4dhk4dx" path="res://assets/spider_idle.png" id="2_qm0ti"]
 [ext_resource type="Texture2D" uid="uid://bnhphokmdah8u" path="res://assets/spider_walk.png" id="3_fhbv5"]
 [ext_resource type="Texture2D" uid="uid://baqj3q1757bd8" path="res://assets/spider_jump.png" id="3_pqap4"]
@@ -207,11 +208,13 @@ shape = SubResource("CapsuleShape2D_qm0ti")
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=93062322]
 target_position = Vector2(600, 0)
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1700627591]
+[node name="Grapple" type="Line2D" parent="." unique_id=1700627591]
 visible = false
 z_index = -1
 points = PackedVector2Array(-6, -9, 0, 0)
-width = 2.0
+width = 4.0
+texture = ExtResource("2_38am0")
+texture_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
 enabled = false
@@ -236,5 +239,13 @@ shape = SubResource("RectangleShape2D_0jhex")
 [node name="HitTimer" type="Timer" parent="." unique_id=1618568267]
 wait_time = 3.0
 one_shot = true
+
+[node name="Trail" type="Line2D" parent="." unique_id=617577570]
+top_level = true
+z_index = -2
+width = 6.0
+default_color = Color(1, 1, 1, 0.6666667)
+texture = ExtResource("2_38am0")
+texture_mode = 2
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1160,7 +1160,7 @@ size = Vector2(54, 30)
 
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
-[node name="Player" parent="." unique_id=1352617234 groups=["player"] instance=ExtResource("1_ny0e7")]
+[node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
 position = Vector2(-768, 440)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1426389600]
@@ -1203,6 +1203,7 @@ shape = SubResource("RectangleShape2D_sx7bb")
 [node name="Grasshopper" type="CharacterBody2D" parent="." unique_id=2092748618]
 position = Vector2(107, 402)
 script = ExtResource("4_5mfmx")
+can_move = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper" unique_id=1330016216]
 position = Vector2(0.19500732, -0.3449974)
