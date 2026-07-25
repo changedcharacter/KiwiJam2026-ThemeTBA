@@ -17,6 +17,3 @@ shape = SubResource("CapsuleShape2D_qm0ti")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1697446378]
 position = Vector2(0, -6)
 texture = ExtResource("1_0s3u6")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=806650409]
-enabled = false
