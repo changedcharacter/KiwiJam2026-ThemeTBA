@@ -5,10 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
 [ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
+[ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
 [ext_resource type="Texture2D" uid="uid://dhpqsey5a6uge" path="res://assets/weta.png" id="5_y4sb7"]
 [ext_resource type="Texture2D" uid="uid://d0qjm8rijiy6j" path="res://assets/weta_entangled.png" id="6_53n4j"]
 [ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="6_r11g4"]
 [ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="7_y4sb7"]
+[ext_resource type="Script" uid="uid://cms2crldbcrb4" path="res://scripts/wasp.gd" id="10_hp1qi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
 texture = ExtResource("2_sx7bb")
@@ -1210,6 +1212,18 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
 size = Vector2(39, 32.999985)
 
+[sub_resource type="Gradient" id="Gradient_hp1qi"]
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_huu7r"]
+gradient = SubResource("Gradient_hp1qi")
+fill = 1
+fill_from = Vector2(0.53999996, 0.63)
+fill_to = Vector2(0.53, 0.98999995)
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_53n4j"]
 atlas = ExtResource("7_y4sb7")
 region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
@@ -1221,12 +1235,29 @@ region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
 size = Vector2(54, 30)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgqaa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hp1qi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_24n67")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hp1qi"]
+radius = 190.759
+
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
 [node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
 position = Vector2(-768, 440)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1426389600]
+position = Vector2(0, 1)
 
 [node name="Fantasy" type="TileMapLayer" parent="Node2D" unique_id=1475517902]
 position = Vector2(-87, 8)
@@ -1296,7 +1327,7 @@ position = Vector2(-102, 34)
 [node name="player_detector" type="RayCast2D" parent="Grasshopper" unique_id=689201478]
 position = Vector2(0, -0.34500122)
 scale = Vector2(0.97437525, 0.9649998)
-target_position = Vector2(125, 0)
+target_position = Vector2(-125, 0)
 
 [node name="Entangle_Mechanic" type="Node2D" parent="Grasshopper" unique_id=1622617653]
 script = ExtResource("6_r11g4")
@@ -1306,6 +1337,18 @@ target_position = Vector2(0, -150)
 
 [node name="RayCast2DDown" type="RayCast2D" parent="Grasshopper/Entangle_Mechanic" unique_id=379114890]
 target_position = Vector2(0, 150)
+
+[node name="PointLight2D" type="PointLight2D" parent="Grasshopper/Entangle_Mechanic" unique_id=1898401501]
+position = Vector2(-3.000001, -13.999999)
+scale = Vector2(1.4531249, 1.5625)
+energy = 4.04
+texture = SubResource("GradientTexture2D_huu7r")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Grasshopper/Entangle_Mechanic" unique_id=1871195686]
+position = Vector2(-4, 7.999999)
+scale = Vector2(1.4531249, 1.5625)
+energy = 4.04
+texture = SubResource("GradientTexture2D_huu7r")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Grasshopper" unique_id=207608211]
 offset_left = -11.0
@@ -1326,6 +1369,36 @@ shape = SubResource("RectangleShape2D_24n67")
 
 [node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 
+[node name="Wasp" type="CharacterBody2D" parent="." unique_id=1906023085 node_paths=PackedStringArray("nav_agent")]
+position = Vector2(-614, -30)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("10_hp1qi")
+nav_agent = NodePath("../NavigationAgent2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wasp" unique_id=244054454]
+shape = SubResource("CircleShape2D_cgqaa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Wasp" unique_id=830403275]
+sprite_frames = SubResource("SpriteFrames_hp1qi")
+
+[node name="Area2D" type="Area2D" parent="Wasp" unique_id=1835324069]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wasp/Area2D" unique_id=1731773131]
+shape = SubResource("CircleShape2D_hp1qi")
+
+[node name="Timer" type="Timer" parent="Wasp" unique_id=391631835]
+wait_time = 0.1
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=414014133]
+debug_enabled = true
+
 [connection signal="timeout" from="Grasshopper/HopTimer" to="Grasshopper" method="_on_hop_timer_timeout"]
 [connection signal="timeout" from="Grasshopper/HopTimer/HopDuration" to="Grasshopper" method="_on_hop_duration_timeout"]
 [connection signal="timeout" from="Grasshopper/Timer" to="Grasshopper" method="_on_timer_timeout"]
+[connection signal="area_entered" from="Wasp/Area2D" to="Wasp" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Wasp/Timer" to="Wasp" method="_on_timer_timeout"]

@@ -1,6 +1,9 @@
 extends Node2D
 @onready var up_ray= $RayCast2DUp
 @onready var down_ray = $RayCast2DDown
+@onready var up_point = $PointLight2D
+@onready var down_point = $PointLight2D2
+
 @onready var grass_hopper = $".."
 
 
@@ -22,11 +25,15 @@ func _physics_process(delta: float) -> void:
 	var down_collider = down_ray.get_collider()
 		
 	if up_collider == player:
+		up_point.visible = false
+		down_point.visible = true	
 		up_ray.add_exception(player)
 		down_ray.remove_exception(player)
 		count_loop()
 	
 	if down_collider == player:
+		up_point.visible = true
+		down_point.visible = false
 		down_ray.add_exception(player)
 		up_ray.remove_exception(player)
 		count_loop()
