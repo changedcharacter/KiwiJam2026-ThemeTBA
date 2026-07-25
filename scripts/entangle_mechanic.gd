@@ -7,6 +7,8 @@ extends Node2D
 @onready var progress = $"../TextureProgressBar"
 @onready var loop_count = 0
 
+signal entangled(target: Vector2)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	progress.visible = false	
@@ -35,3 +37,5 @@ func count_loop():
 	progress.value += 20
 	loop_count += 1
 	print(loop_count)
+	if loop_count == 5:
+		player.converge_trail(global_position)

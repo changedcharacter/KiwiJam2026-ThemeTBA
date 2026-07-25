@@ -19,10 +19,10 @@ func update_lives_label():
 
 func move_pause_panel():
 	var pausePanel = $PausePanel
-	pausePanel.position = Vector2(426, -400)
+	pausePanel.position = Vector2(490.0, -400)
 	pausePanel.visible = true
 	var tween = pausePanel.create_tween()
-	tween.tween_property(pausePanel, "position", Vector2(426, 174), 0.5)\
+	tween.tween_property(pausePanel, "position", Vector2(490.0, 210.0), 0.5)\
 		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 	$PausePanel/TweenTimer.start()

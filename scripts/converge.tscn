@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bcexo5be2gy27"]
+
+[ext_resource type="Script" uid="uid://h27tax63rlht" path="res://converge.gd" id="1_dhqx1"]
+[ext_resource type="Texture2D" uid="uid://dti1i5cf0sh31" path="res://assets/string.png" id="1_mflfb"]
+
+[node name="Converge" type="Line2D" unique_id=1946802576]
+top_level = true
+z_index = -1
+width = 6.0
+default_color = Color(1, 1, 1, 0.6666667)
+texture = ExtResource("1_mflfb")
+texture_mode = 2
+script = ExtResource("1_dhqx1")
