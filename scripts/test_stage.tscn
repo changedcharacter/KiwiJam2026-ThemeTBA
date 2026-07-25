@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://diwmpepydgkem" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="2_sx7bb"]
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Script" uid="uid://b6ndq8chbixee" path="res://scripts/grasshopper.gd" id="4_5mfmx"]
-[ext_resource type="PackedScene" path="res://scripts/hud.tscn" id="4_dfd7s"]
+[ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
 [ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_24n67"]
 [ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="6_r11g4"]
 [ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="7_y4sb7"]
@@ -1155,9 +1155,12 @@ region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
 atlas = ExtResource("7_y4sb7")
 region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
+size = Vector2(54, 30)
+
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
-[node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
+[node name="Player" parent="." unique_id=1352617234 groups=["player"] instance=ExtResource("1_ny0e7")]
 position = Vector2(-768, 440)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1426389600]
@@ -1244,6 +1247,14 @@ offset_right = 11.0
 offset_bottom = -11.0
 texture_under = SubResource("AtlasTexture_53n4j")
 texture_progress = SubResource("AtlasTexture_cgqaa")
+
+[node name="Area2D" type="Area2D" parent="Grasshopper" unique_id=1863616368]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grasshopper/Area2D" unique_id=139590096]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_24n67")
 
 [node name="HUD" parent="." unique_id=899098104 instance=ExtResource("4_dfd7s")]
 

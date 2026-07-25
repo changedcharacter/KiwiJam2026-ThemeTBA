@@ -1,11 +1,21 @@
 extends CanvasLayer
 
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var lives_label = $LivesLabel
+
+func _ready() -> void:
+	player.connect("hit", update_lives_label)
+	update_lives_label()
+
 func _input(event):
 	if event.is_action_pressed("pause"):
 		var tree = get_tree()
 		if not tree.paused:
 			tree.paused = true
 			move_pause_panel()
+
+func update_lives_label():
+	lives_label.text = "Lives: " + str(player.lives)
 
 func move_pause_panel():
 	var pausePanel = $PausePanel

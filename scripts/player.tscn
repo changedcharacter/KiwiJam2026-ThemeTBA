@@ -193,7 +193,10 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1352617234]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jhex"]
+size = Vector2(52, 36)
+
+[node name="Player" type="CharacterBody2D" unique_id=1352617234 groups=["player"]]
 collision_layer = 3
 script = ExtResource("1_qm0ti")
 
@@ -215,12 +218,23 @@ enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1141997585]
 sprite_frames = SubResource("SpriteFrames_ahudb")
-animation = &"shoot"
+animation = &"idle"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1672097144]
 visible = false
 texture = ExtResource("3_pqap4")
 hframes = 8
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1416618262]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=392501340]
+shape = SubResource("RectangleShape2D_0jhex")
+
+[node name="HitTimer" type="Timer" parent="." unique_id=1618568267]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

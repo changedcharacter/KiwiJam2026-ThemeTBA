@@ -91,7 +91,7 @@ func change_direction():
 	else:
 		direction = (target.position - self.position).normalized()
 		direction = sign(direction)
-		print(direction)
+		#print(direction)
 		if direction.x == 1.0:
 			#player is to the right
 			sprite.flip_h = false
