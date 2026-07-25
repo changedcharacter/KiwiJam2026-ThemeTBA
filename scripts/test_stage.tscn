@@ -1203,7 +1203,6 @@ shape = SubResource("RectangleShape2D_sx7bb")
 [node name="Grasshopper" type="CharacterBody2D" parent="." unique_id=2092748618]
 position = Vector2(53, 415)
 script = ExtResource("4_5mfmx")
-can_move = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grasshopper" unique_id=1330016216]
 position = Vector2(0.19500732, -0.3449974)
