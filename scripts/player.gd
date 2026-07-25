@@ -13,8 +13,9 @@ const max_fall_velocity: float = 400.0
 const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
-const anim_swing_threshold: float = 40.0
+const anim_swing_threshold: float = 150.0
 
+var lives = 3
 var jumped := false
 var grapple_hooked = false
 var grapple_target: Vector2
@@ -71,7 +72,10 @@ func _retract_grapple():
 func _update_grapple():
 	if not grapple_hooked: return
 	line.set_point_position(1, to_local(grapple_target))
-	grapple_length = max(min_grapple_length, grapple_length - grapple_reel_in_rate)
+	if Input.is_action_pressed("climb"):
+		grapple_length = max(min_grapple_length, grapple_length - grapple_reel_in_rate*2)
+	else:
+		grapple_length = max(min_grapple_length, grapple_length - grapple_reel_in_rate)
 
 func _do_animation(direction):
 	if is_on_floor():
@@ -81,22 +85,32 @@ func _do_animation(direction):
 			sprite.flip_h = direction < 0
 			sprite.animation = "move"
 		else:
-			sprite.animation = "idle"
+			if Input.is_action_just_pressed("grapple"):
+				sprite.animation = "shoot"
+			if sprite.animation != "shoot" or not sprite.is_playing():
+				sprite.animation = "idle"
+				sprite.play()
 	else:
 		sprite.hide()
 		sprite_air.show()
-		sprite_air.flip_h = velocity.x < 0
 		if abs(velocity.x) < anim_swing_threshold:
 			if velocity.y < -anim_swing_threshold:
 				# Rising almost-straight up
 				sprite_air.frame = 4
 			elif velocity.y < anim_swing_threshold:
 				# Almost unmoving
-				sprite_air.frame = 5
+				if grapple_hooked:
+					sprite.show()
+					sprite_air.hide()
+					sprite.animation = "dangle"
+					sprite.flip_h = false
+				else:
+					sprite_air.frame = 5
 			else:
 				# Falling almost-straight down
 				sprite_air.frame = 7
 		else:
+			sprite_air.flip_h = velocity.x < 0
 			if velocity.y < -anim_swing_threshold:
 				# Rising diagonally up
 				sprite_air.frame = 3
@@ -106,3 +120,11 @@ func _do_animation(direction):
 			else:
 				# Falling almost-straight down
 				sprite_air.frame = 6
+
+func lose_life():
+	lives -= 1
+	if lives < 0:
+		game_over()
+
+func game_over():
+	pass
