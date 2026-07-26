@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bd2urpirbmc88" path="res://audio/tatamusic-game-gaming-video-game-music-482380.mp3" id="11_hb8fm"]
 [ext_resource type="AudioStream" uid="uid://cnnskrglouna2" path="res://audio/pripac-relaxing-vibes-for-gaming-focus-323623.mp3" id="12_hb8fm"]
 [ext_resource type="AudioStream" uid="uid://uvjgd0w0ti7j" path="res://audio/onetent-mortal-gaming-144000.mp3" id="13_nxj3y"]
+[ext_resource type="Texture2D" uid="uid://dymvg4qeitbrc" path="res://assets/Wasp_placeholder.png" id="4_53n4j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
 texture = ExtResource("2_sx7bb")
