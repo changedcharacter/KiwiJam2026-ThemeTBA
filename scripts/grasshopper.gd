@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-
-@onready var target = $"../Player"
+@onready var hud = get_tree().get_first_node_in_group("hud")
+@onready var target = get_tree().get_first_node_in_group("player")
 @onready var sprite = $AnimatedSprite2D
 @onready var ray_cast = $player_detector
-@onready var timer = $Timer
+@onready var chase_timer = $ChaseTimer
 @onready var hop_timer = $HopTimer
 @onready var hop_duration = $HopTimer/HopDuration
 
@@ -40,7 +40,7 @@ var current_state = States.WANDER
 func _ready() -> void:
 	hop_timer.start()
 	sprite.play("default")
-	pass # Replace with function body.
+	hud.enemies += 1
 
 
 func _physics_process(delta: float) -> void:
@@ -59,7 +59,7 @@ func handle_movement(delta):
 		hop_state = false
 		hop_timer.stop()
 		hop_duration.stop()
-		timer.stop()
+		chase_timer.stop()
 		velocity.x = 0
 		velocity.y += 30
 		
@@ -86,13 +86,13 @@ func look_for_player():
 			stop_chase()
 
 func chase_player():
-	timer.start()
+	chase_timer.start()
 	current_state = States.CHASE
 	
 func stop_chase():
 
-	if timer.time_left <= 0:
-		timer.stop()	
+	if chase_timer.time_left <= 0:
+		chase_timer.stop()	
 
 func change_direction():
 	if !current_state == States.DEAD: 
@@ -130,10 +130,12 @@ func die():
 	
 	sprite.play("webbed")
 	current_state = States.DEAD
+	hud.enemies -= 1
 	$TextureProgressBar.queue_free()
-	
-	pass
-			
+	$Area2D/CollisionShape2D.disabled = true
+	$Entangle_Mechanic.queue_free()
+	$DeathTimer.start()
+
 func _on_timer_timeout() -> void:
 	current_state = States.WANDER
 	pass # Replace with function body.
@@ -155,3 +157,7 @@ func _on_hop_duration_timeout() -> void:
 	hop_state = false
 	hop_timer.start()
 	pass # Replace with function body.
+
+
+func _on_death_timer_timeout() -> void:
+	sprite.play("webbed")
