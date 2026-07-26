@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://crkf8bcvhi8ek"]
+[gd_scene format=3 uid="uid://cmmgn7n0w4xtv"]
 
-[ext_resource type="Script" path="res://wasp.gd" id="1_gy4hm"]
-[ext_resource type="Texture2D" path="res://assets/wasp.png" id="2_34ah8"]
+[ext_resource type="Script" uid="uid://dtayi2tc3wqox" path="res://wasp.gd" id="1_gy4hm"]
+[ext_resource type="Texture2D" uid="uid://bp2sq3ykftvcs" path="res://assets/wasp.png" id="2_34ah8"]
 [ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="3_2wqlf"]
 [ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="4_34ah8"]
 
@@ -89,7 +89,6 @@ wait_time = 0.3
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=822614823]
-collision_layer = 0
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1370903227]

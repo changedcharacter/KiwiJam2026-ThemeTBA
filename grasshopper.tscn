@@ -85,12 +85,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
 size = Vector2(39, 32.999985)
 
-[sub_resource type="Gradient" id="Gradient_hp1qi"]
+[sub_resource type="Gradient" id="Gradient_6adcc"]
 offsets = PackedFloat32Array(0, 0.5)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_huu7r"]
-gradient = SubResource("Gradient_hp1qi")
+gradient = SubResource("Gradient_6adcc")
 fill = 1
 fill_from = Vector2(0.53999996, 0.63)
 fill_to = Vector2(0.53, 0.98999995)
@@ -159,13 +159,13 @@ target_position = Vector2(0, 150)
 [node name="PointLight2D" type="PointLight2D" parent="Entangle_Mechanic" unique_id=8105921]
 position = Vector2(-3.000001, -13.999999)
 scale = Vector2(1.4531249, 1.5625)
-energy = 4.04
+energy = 1.5
 texture = SubResource("GradientTexture2D_huu7r")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Entangle_Mechanic" unique_id=1811950373]
 position = Vector2(-4, 7.999999)
 scale = Vector2(1.4531249, 1.5625)
-energy = 4.04
+energy = 1.5
 texture = SubResource("GradientTexture2D_huu7r")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=476714125]
