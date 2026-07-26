@@ -125,6 +125,7 @@ func change_direction():
 				ray_cast.target_position = Vector2(-125,0)		
 
 func die():
+	SFX_Manager.play_sound_effect_from_dictionary("paper_scrunch")
 	current_state = States.DEAD
 	hud.enemies -= 1
 	$TextureProgressBar.queue_free()
