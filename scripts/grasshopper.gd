@@ -125,14 +125,10 @@ func change_direction():
 				ray_cast.target_position = Vector2(-125,0)		
 
 func die():
-	$Entangle_Mechanic/PointLight2D.queue_free()
-	$Entangle_Mechanic/PointLight2D2.queue_free()
-	
-	sprite.play("webbed")
 	current_state = States.DEAD
 	hud.enemies -= 1
 	$TextureProgressBar.queue_free()
-	$Area2D/CollisionShape2D.disabled = true
+	$Hitbox.queue_free()
 	$Entangle_Mechanic.queue_free()
 	$DeathTimer.start()
 
@@ -156,8 +152,6 @@ func get_Player():
 func _on_hop_duration_timeout() -> void:
 	hop_state = false
 	hop_timer.start()
-	pass # Replace with function body.
-
 
 func _on_death_timer_timeout() -> void:
 	sprite.play("webbed")
