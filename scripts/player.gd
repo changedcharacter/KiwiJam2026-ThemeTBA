@@ -169,6 +169,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		hittimer.start()
 		lives -= 1
 		emit_signal("hit")
+		SFX_Manager.play_sound_effect_from_dictionary("splat_quick")
 		var tween = create_tween()
 		for i in range(5):
 			tween.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.3)
