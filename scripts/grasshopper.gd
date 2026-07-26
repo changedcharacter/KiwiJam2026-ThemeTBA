@@ -38,7 +38,6 @@ var current_state = States.WANDER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(target)
 	hop_timer.start()
 	sprite.play("default")
 	pass # Replace with function body.
@@ -116,7 +115,6 @@ func change_direction():
 		else:
 			direction = (target.position - self.position).normalized()
 			direction = sign(direction)
-			print(direction)
 			if direction.x == 1.0:
 				#player is to the right
 				sprite.flip_h = true	
@@ -127,7 +125,9 @@ func change_direction():
 				ray_cast.target_position = Vector2(-125,0)		
 
 func die():
-	print("died")
+	$Entangle_Mechanic/PointLight2D.queue_free()
+	$Entangle_Mechanic/PointLight2D2.queue_free()
+	
 	sprite.play("webbed")
 	current_state = States.DEAD
 	$TextureProgressBar.queue_free()

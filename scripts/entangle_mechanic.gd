@@ -3,7 +3,6 @@ extends Node2D
 @onready var down_ray = $RayCast2DDown
 @onready var up_point = $PointLight2D
 @onready var down_point = $PointLight2D2
-@onready var grass_hopper = $".."
 
 
 @onready var player = Global.current_player
@@ -46,5 +45,5 @@ func count_loop():
 		loop_count += 1
 		print(loop_count)
 		if progress.value == 100:
-			grass_hopper.die()
+			$"..".die()
 			player.converge_trail(global_position)

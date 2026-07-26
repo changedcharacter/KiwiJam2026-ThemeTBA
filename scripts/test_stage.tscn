@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Texture2D" uid="uid://dymvg4qeitbrc" path="res://assets/Wasp_placeholder.png" id="4_53n4j"]
 [ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
+[ext_resource type="PackedScene" uid="uid://cmmgn7n0w4xtv" path="res://Wasp.tscn" id="7_r11g4"]
 [ext_resource type="PackedScene" uid="uid://cohoofblo028r" path="res://grasshopper.tscn" id="10_hp1qi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
@@ -1128,6 +1129,11 @@ sources/1 = SubResource("TileSetAtlasSource_dfd7s")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7bb"]
 size = Vector2(4608.125, 20)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_r11g4"]
+vertices = PackedVector2Array(2846.9063, 721.03906, -736, 736.9531, -736, -140.14844, 2839.0781, -194.84375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-746, -150, -746, 747, 2857, 731, 2849, -205)])
+
 [node name="TestStage" type="Node2D" unique_id=632125430]
 
 [node name="Player" parent="." unique_id=1352617234 instance=ExtResource("1_ny0e7")]
@@ -1192,3 +1198,11 @@ position = Vector2(240, 408)
 
 [node name="Grasshopper" parent="." unique_id=1880106891 instance=ExtResource("10_hp1qi")]
 position = Vector2(2466, 408)
+
+[node name="CharacterBody2D" parent="." unique_id=549920511 instance=ExtResource("7_r11g4")]
+position = Vector2(-110, -110)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1965154179]
+visible = false
+position = Vector2(-110, -110)
+navigation_polygon = SubResource("NavigationPolygon_r11g4")
