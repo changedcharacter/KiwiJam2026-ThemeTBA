@@ -18,7 +18,7 @@ const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
 const anim_swing_threshold: float = 150.0
 const kb_power: float = 1000.0
-const max_trail_points: int = 300
+const max_trail_points: int = 500
 const converge_line = preload("res://scripts/converge.tscn")
 
 var lives = 5
@@ -33,7 +33,6 @@ var queue_drift: Array = []
 signal hit
 
 func _ready() -> void:
-	Global.current_player = self
 	for i in range(200):
 		var angle = i*2*PI/200
 		queue_drift.push_back(0.1*Vector2(sin(2*angle), cos(angle)))

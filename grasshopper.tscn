@@ -106,7 +106,7 @@ atlas = ExtResource("5_otetp")
 region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
-size = Vector2(54, 30)
+size = Vector2(44, 30)
 
 [node name="Grasshopper" type="CharacterBody2D" unique_id=1250482131]
 script = ExtResource("1_6adcc")
@@ -115,7 +115,7 @@ script = ExtResource("1_6adcc")
 position = Vector2(-1.9073486e-06, 7.0000124)
 scale = Vector2(1.1247656, 0.99273425)
 sprite_frames = SubResource("SpriteFrames_5mfmx")
-animation = &"webbed"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=503461740]
 position = Vector2(0.19500732, 6.5)
@@ -128,8 +128,12 @@ wait_time = 3.0
 wait_time = 0.3
 one_shot = true
 
-[node name="Timer" type="Timer" parent="." unique_id=181682736]
+[node name="ChaseTimer" type="Timer" parent="." unique_id=181682736]
 wait_time = 5.0
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=980927995]
+wait_time = 0.35
 one_shot = true
 
 [node name="rightbound" type="Node2D" parent="." unique_id=1782294160]
@@ -183,4 +187,5 @@ shape = SubResource("RectangleShape2D_24n67")
 
 [connection signal="timeout" from="HopTimer" to="." method="_on_hop_timer_timeout"]
 [connection signal="timeout" from="HopTimer/HopDuration" to="." method="_on_hop_duration_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
