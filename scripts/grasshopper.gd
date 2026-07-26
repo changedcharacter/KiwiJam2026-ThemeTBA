@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-
-@onready var target = $"../Player"
+@onready var hud = get_tree().get_first_node_in_group("hud")
+@onready var target = get_tree().get_first_node_in_group("player")
 @onready var sprite = $AnimatedSprite2D
 @onready var ray_cast = $player_detector
-@onready var timer = $Timer
+@onready var chase_timer = $ChaseTimer
 @onready var hop_timer = $HopTimer
 @onready var hop_duration = $HopTimer/HopDuration
 
@@ -23,8 +23,8 @@ const max_fall_velocity: float = 200.0
 
 @export var can_move = true
 
-@onready var right_bounds = $rightbound.position.x
-@onready var left_bounds = $leftbnoound.position.x
+@onready var right_bounds = self.position + Vector2(150,0)
+@onready var left_bounds = self.position + Vector2(-150,0)
 
 
 @onready var direction = Vector2.RIGHT
@@ -38,10 +38,9 @@ var current_state = States.WANDER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(target)
 	hop_timer.start()
 	sprite.play("default")
-	pass # Replace with function body.
+	hud.enemies += 1
 
 
 func _physics_process(delta: float) -> void:
@@ -60,7 +59,7 @@ func handle_movement(delta):
 		hop_state = false
 		hop_timer.stop()
 		hop_duration.stop()
-		timer.stop()
+		chase_timer.stop()
 		velocity.x = 0
 		velocity.y += 30
 		
@@ -87,20 +86,20 @@ func look_for_player():
 			stop_chase()
 
 func chase_player():
-	timer.start()
+	chase_timer.start()
 	current_state = States.CHASE
 	
 func stop_chase():
 
-	if timer.time_left <= 0:
-		timer.stop()	
+	if chase_timer.time_left <= 0:
+		chase_timer.stop()	
 
 func change_direction():
 	if !current_state == States.DEAD: 
 		if current_state == States.WANDER:
 			if sprite.flip_h:
 				#moving right
-				if self.position.x <= right_bounds:
+				if self.position.x <= right_bounds.x:
 					direction = Vector2.RIGHT
 				else:
 					direction = Vector2.LEFT
@@ -108,7 +107,7 @@ func change_direction():
 					ray_cast.target_position = Vector2(-125,0)
 			else:
 				#moving left
-				if self.position.x >= left_bounds:
+				if self.position.x >= left_bounds.x:
 					direction = Vector2.LEFT
 				else:
 					sprite.flip_h = true
@@ -116,7 +115,6 @@ func change_direction():
 		else:
 			direction = (target.position - self.position).normalized()
 			direction = sign(direction)
-			print(direction)
 			if direction.x == 1.0:
 				#player is to the right
 				sprite.flip_h = true	
@@ -127,13 +125,14 @@ func change_direction():
 				ray_cast.target_position = Vector2(-125,0)		
 
 func die():
-	print("died")
-	sprite.play("webbed")
+	SFX_Manager.play_sound_effect_from_dictionary("paper_scrunch")
 	current_state = States.DEAD
+	hud.enemies -= 1
 	$TextureProgressBar.queue_free()
-	
-	pass
-			
+	$Hitbox.queue_free()
+	$Entangle_Mechanic.queue_free()
+	$DeathTimer.start()
+
 func _on_timer_timeout() -> void:
 	current_state = States.WANDER
 	pass # Replace with function body.
@@ -154,4 +153,6 @@ func get_Player():
 func _on_hop_duration_timeout() -> void:
 	hop_state = false
 	hop_timer.start()
-	pass # Replace with function body.
+
+func _on_death_timer_timeout() -> void:
+	sprite.play("webbed")

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var hitbox := $Hitbox
 @onready var hittimer := $HitTimer
 @onready var trail := $Trail
+@onready var hud = get_tree().get_first_node_in_group("hud")
 
 const speed: float = 30.0
 const max_speed: float = 300.0
@@ -17,8 +18,8 @@ const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
 const anim_swing_threshold: float = 150.0
-const kb_power: float = 1000.0
-const max_trail_points: int = 300
+const kb_power: float = 800.0
+const max_trail_points: int = 500
 const converge_line = preload("res://scripts/converge.tscn")
 
 var lives = 5
@@ -33,12 +34,12 @@ var queue_drift: Array = []
 signal hit
 
 func _ready() -> void:
-	Global.current_player = self
 	for i in range(200):
 		var angle = i*2*PI/200
 		queue_drift.push_back(0.1*Vector2(sin(2*angle), cos(angle)))
 
 func _physics_process(_delta: float) -> void:
+	SFX_Manager.update_position(self)
 	ray.look_at(get_global_mouse_position())
 	var direction = Input.get_axis("move_left", "move_right")
 	if Input.is_action_just_pressed("grapple"):
@@ -71,15 +72,18 @@ func _do_movement(direction):
 	if Input.is_action_pressed("jump") and \
 			not jumped and \
 			(is_on_floor() or grapple_hooked):
+		SFX_Manager.play_sound_effect_from_dictionary("foley_footstep_gravel_1")
 		velocity.y += jump_velocity
 		_retract_grapple()
 		jumped = true
+		#SFX_Manager.play_sound_effect_from_dictionary("foley_footstep_gravel_1")
 	if Input.is_action_just_released("jump"):
 		jumped = false
 	
 	move_and_slide()
 
 func _launch_grapple():
+	SFX_Manager.play_sound_effect_from_dictionary("whoosh_1")
 	if not ray.is_colliding(): return
 	grapple_hooked = true
 	grapple_target = ray.get_collision_point()
@@ -125,6 +129,7 @@ func _do_animation(direction):
 					sprite_air.hide()
 					sprite.animation = "dangle"
 					sprite.flip_h = false
+					sprite.play()
 				else:
 					sprite_air.frame = 5
 			else:
@@ -175,4 +180,5 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		kb_force = -kb_power * direction
 
 func game_over():
-	pass
+	get_tree().paused = true
+	hud.move_over_panel("Game Over")

@@ -85,12 +85,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfmx"]
 size = Vector2(39, 32.999985)
 
-[sub_resource type="Gradient" id="Gradient_hp1qi"]
+[sub_resource type="Gradient" id="Gradient_6adcc"]
 offsets = PackedFloat32Array(0, 0.5)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_huu7r"]
-gradient = SubResource("Gradient_hp1qi")
+gradient = SubResource("Gradient_6adcc")
 fill = 1
 fill_from = Vector2(0.53999996, 0.63)
 fill_to = Vector2(0.53, 0.98999995)
@@ -106,7 +106,7 @@ atlas = ExtResource("5_otetp")
 region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24n67"]
-size = Vector2(54, 30)
+size = Vector2(44, 30)
 
 [node name="Grasshopper" type="CharacterBody2D" unique_id=1250482131]
 script = ExtResource("1_6adcc")
@@ -115,7 +115,7 @@ script = ExtResource("1_6adcc")
 position = Vector2(-1.9073486e-06, 7.0000124)
 scale = Vector2(1.1247656, 0.99273425)
 sprite_frames = SubResource("SpriteFrames_5mfmx")
-animation = &"webbed"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=503461740]
 position = Vector2(0.19500732, 6.5)
@@ -128,8 +128,12 @@ wait_time = 3.0
 wait_time = 0.3
 one_shot = true
 
-[node name="Timer" type="Timer" parent="." unique_id=181682736]
+[node name="ChaseTimer" type="Timer" parent="." unique_id=181682736]
 wait_time = 5.0
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=980927995]
+wait_time = 0.35
 one_shot = true
 
 [node name="rightbound" type="Node2D" parent="." unique_id=1782294160]
@@ -155,13 +159,13 @@ target_position = Vector2(0, 150)
 [node name="PointLight2D" type="PointLight2D" parent="Entangle_Mechanic" unique_id=8105921]
 position = Vector2(-3.000001, -13.999999)
 scale = Vector2(1.4531249, 1.5625)
-energy = 4.04
+energy = 1.5
 texture = SubResource("GradientTexture2D_huu7r")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Entangle_Mechanic" unique_id=1811950373]
 position = Vector2(-4, 7.999999)
 scale = Vector2(1.4531249, 1.5625)
-energy = 4.04
+energy = 1.5
 texture = SubResource("GradientTexture2D_huu7r")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=476714125]
@@ -173,14 +177,15 @@ texture_under = SubResource("AtlasTexture_53n4j")
 texture_progress = SubResource("AtlasTexture_cgqaa")
 metadata/_edit_use_anchors_ = true
 
-[node name="Area2D" type="Area2D" parent="." unique_id=861435513]
+[node name="Hitbox" type="Area2D" parent="." unique_id=861435513]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1501734230]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1501734230]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_24n67")
 
 [connection signal="timeout" from="HopTimer" to="." method="_on_hop_timer_timeout"]
 [connection signal="timeout" from="HopTimer/HopDuration" to="." method="_on_hop_duration_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
