@@ -6,11 +6,8 @@ extends CanvasLayer
 @onready var win_timer = $WinTimer
 var enemies = 0
 
-func _ready() -> void:
-	player.connect("hit", update_lives_label)
-	update_lives_label()
-
 func _process(_delta: float) -> void:
+	lives_label.text = "Lives: " + str(player.lives)
 	enemy_label.text = "Enemies left: " + str(enemies)
 	if enemies <= 0 and win_timer.is_stopped():
 		win_timer.start()
@@ -21,9 +18,6 @@ func _input(event):
 		if not tree.paused:
 			tree.paused = true
 			move_pause_panel()
-
-func update_lives_label():
-	lives_label.text = "Lives: " + str(player.lives)
 
 func move_pause_panel():
 	var pausePanel = $PausePanel

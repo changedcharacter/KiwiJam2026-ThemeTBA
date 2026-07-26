@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var chase_timer = $ChaseTimer
 @onready var hop_timer = $HopTimer
 @onready var hop_duration = $HopTimer/HopDuration
-
+@onready var player = get_tree().get_first_node_in_group("player")
 
 var speed = 20
 var chase_speed = 60
@@ -128,6 +128,7 @@ func die():
 	SFX_Manager.play_sound_effect_from_dictionary("paper_scrunch")
 	current_state = States.DEAD
 	hud.enemies -= 1
+	player.lives += 1
 	$TextureProgressBar.queue_free()
 	$Hitbox.queue_free()
 	$Entangle_Mechanic.queue_free()

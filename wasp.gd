@@ -55,6 +55,7 @@ func _on_timer_timeout() -> void:
 	
 func die():
 	hud.enemies -= 1
+	player.lives += 1
 	current_state = States.DEAD
 	$TextureProgressBar.queue_free()
 	$Entangle_Mechanic.queue_free()
