@@ -39,6 +39,7 @@ func _ready() -> void:
 		queue_drift.push_back(0.1*Vector2(sin(2*angle), cos(angle)))
 
 func _physics_process(_delta: float) -> void:
+	SFX_Manager.update_position(self)
 	ray.look_at(get_global_mouse_position())
 	var direction = Input.get_axis("move_left", "move_right")
 	if Input.is_action_just_pressed("grapple"):
@@ -74,6 +75,7 @@ func _do_movement(direction):
 		velocity.y += jump_velocity
 		_retract_grapple()
 		jumped = true
+		SFX_Manager.play_sound_effect_from_dictionary("slap")
 	if Input.is_action_just_released("jump"):
 		jumped = false
 	

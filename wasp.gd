@@ -19,6 +19,7 @@ var target = null
 var home_pos = Vector2.ZERO
 
 func _ready() -> void:
+	sprite.play("default")
 	home_pos = self.global_position
 	nav_agent.path_desired_distance = 4
 	nav_agent.target_desired_distance = 4

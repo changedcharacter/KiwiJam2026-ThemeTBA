@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dx8epsm06c8ah"
+path="res://.godot/imported/sitar_mystery.wav-5a8b70e6a99d322d42b3a147f615f1a2.sample"
+
+[deps]
+
+source_file="res://audio/400 Sounds Pack/Musical Effects/sitar_mystery.wav"
+dest_files=["res://.godot/imported/sitar_mystery.wav-5a8b70e6a99d322d42b3a147f615f1a2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
