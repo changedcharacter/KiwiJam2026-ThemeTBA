@@ -72,16 +72,18 @@ func _do_movement(direction):
 	if Input.is_action_pressed("jump") and \
 			not jumped and \
 			(is_on_floor() or grapple_hooked):
+		SFX_Manager.play_sound_effect_from_dictionary("foley_footstep_gravel_1")
 		velocity.y += jump_velocity
 		_retract_grapple()
 		jumped = true
-		SFX_Manager.play_sound_effect_from_dictionary("slap")
+		#SFX_Manager.play_sound_effect_from_dictionary("foley_footstep_gravel_1")
 	if Input.is_action_just_released("jump"):
 		jumped = false
 	
 	move_and_slide()
 
 func _launch_grapple():
+	SFX_Manager.play_sound_effect_from_dictionary("whoosh_1")
 	if not ray.is_colliding(): return
 	grapple_hooked = true
 	grapple_target = ray.get_collision_point()
