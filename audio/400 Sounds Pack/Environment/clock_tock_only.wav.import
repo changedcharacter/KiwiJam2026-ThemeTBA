@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0kyntq5s4hja"
+path="res://.godot/imported/clock_tock_only.wav-53d7a730cb1fbdfb5fd46a354c62e845.sample"
+
+[deps]
+
+source_file="res://audio/400 Sounds Pack/Environment/clock_tock_only.wav"
+dest_files=["res://.godot/imported/clock_tock_only.wav-53d7a730cb1fbdfb5fd46a354c62e845.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

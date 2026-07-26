@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwea0lt4rt2fs"
+path="res://.godot/imported/weapon_equip_short.wav-f3f297092fa4550262098a1ed8df1056.sample"
+
+[deps]
+
+source_file="res://audio/400 Sounds Pack/Weapons/weapon_equip_short.wav"
+dest_files=["res://.godot/imported/weapon_equip_short.wav-f3f297092fa4550262098a1ed8df1056.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

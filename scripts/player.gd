@@ -75,6 +75,7 @@ func _do_movement(direction):
 		velocity.y += jump_velocity
 		_retract_grapple()
 		jumped = true
+		SFX_Manager.play_sound_effect_from_dictionary("slap")
 	if Input.is_action_just_released("jump"):
 		jumped = false
 	
