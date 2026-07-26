@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var hitbox := $Hitbox
 @onready var hittimer := $HitTimer
 @onready var trail := $Trail
+@onready var hud = get_tree().get_first_node_in_group("hud")
 
 const speed: float = 30.0
 const max_speed: float = 300.0
@@ -17,7 +18,7 @@ const min_grapple_length: float = 2.0
 const grapple_reel_in_rate: float = 1.0
 const grapple_damping: float = 0.02
 const anim_swing_threshold: float = 150.0
-const kb_power: float = 1000.0
+const kb_power: float = 800.0
 const max_trail_points: int = 500
 const converge_line = preload("res://scripts/converge.tscn")
 
@@ -124,6 +125,7 @@ func _do_animation(direction):
 					sprite_air.hide()
 					sprite.animation = "dangle"
 					sprite.flip_h = false
+					sprite.play()
 				else:
 					sprite_air.frame = 5
 			else:
@@ -174,4 +176,5 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		kb_force = -kb_power * direction
 
 func game_over():
-	pass
+	get_tree().paused = true
+	hud.move_over_panel("Game Over")
