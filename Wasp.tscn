@@ -66,6 +66,9 @@ region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
 atlas = ExtResource("4_34ah8")
 region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_34ah8"]
+radius = 12.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=549920511 node_paths=PackedStringArray("nav_agent")]
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -90,6 +93,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=822614823]
+visible = false
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1370903227]
@@ -125,5 +129,17 @@ texture_under = SubResource("AtlasTexture_sfiok")
 texture_progress = SubResource("AtlasTexture_ngm3t")
 metadata/_edit_use_anchors_ = true
 
+[node name="DeathTimer" type="Timer" parent="." unique_id=575304395]
+wait_time = 0.35
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1302430353]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=570567396]
+shape = SubResource("CircleShape2D_34ah8")
+
 [connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

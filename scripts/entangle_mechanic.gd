@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 	var down_collider = down_ray.get_collider()
 	if up_collider == player:
 		up_point.visible = false
-		down_point.visible = true	
+		down_point.visible = true
 		up_ray.add_exception(player)
 		down_ray.remove_exception(player)
 		count_loop()

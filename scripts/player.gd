@@ -34,7 +34,6 @@ var queue_drift: Array = []
 signal hit
 
 func _ready() -> void:
-	Global.current_player = self
 	for i in range(200):
 		var angle = i*2*PI/200
 		queue_drift.push_back(0.1*Vector2(sin(2*angle), cos(angle)))
