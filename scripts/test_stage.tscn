@@ -6,9 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://djcd2ysa6384x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="3_jr3ou"]
 [ext_resource type="Texture2D" uid="uid://dymvg4qeitbrc" path="res://assets/Wasp_placeholder.png" id="4_53n4j"]
 [ext_resource type="PackedScene" uid="uid://byqaqgyoijv3d" path="res://scripts/hud.tscn" id="4_dfd7s"]
-[ext_resource type="PackedScene" uid="uid://cmmgn7n0w4xtv" path="res://Wasp.tscn" id="7_r11g4"]
 [ext_resource type="Texture2D" uid="uid://dqv82xpeqrng2" path="res://assets/spider-placeholder.png" id="5_r11g4"]
+[ext_resource type="PackedScene" uid="uid://cmmgn7n0w4xtv" path="res://Wasp.tscn" id="7_r11g4"]
+[ext_resource type="Script" uid="uid://chypvuvpi0mtq" path="res://scripts/background_audio.gd" id="10_cgqaa"]
 [ext_resource type="PackedScene" uid="uid://cohoofblo028r" path="res://grasshopper.tscn" id="10_hp1qi"]
+[ext_resource type="AudioStream" uid="uid://bd2urpirbmc88" path="res://audio/tatamusic-game-gaming-video-game-music-482380.mp3" id="11_hb8fm"]
+[ext_resource type="AudioStream" uid="uid://cnnskrglouna2" path="res://audio/pripac-relaxing-vibes-for-gaming-focus-323623.mp3" id="12_hb8fm"]
+[ext_resource type="AudioStream" uid="uid://uvjgd0w0ti7j" path="res://audio/onetent-mortal-gaming-144000.mp3" id="13_nxj3y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jr3ou"]
 texture = ExtResource("2_sx7bb")
@@ -1263,3 +1267,19 @@ position = Vector2(-110, -110)
 visible = false
 position = Vector2(-110, -110)
 navigation_polygon = SubResource("NavigationPolygon_r11g4")
+
+[node name="Background_audio" type="Node2D" parent="." unique_id=1697115989]
+script = ExtResource("10_cgqaa")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Background_audio" unique_id=1631759700]
+stream = ExtResource("11_hb8fm")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Background_audio" unique_id=1300051132]
+stream = ExtResource("12_hb8fm")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Background_audio" unique_id=789602615]
+stream = ExtResource("13_nxj3y")
+
+[connection signal="finished" from="Background_audio/AudioStreamPlayer2D" to="Background_audio" method="_on_audio_stream_player_2d_finished"]
+[connection signal="finished" from="Background_audio/AudioStreamPlayer2D2" to="Background_audio" method="_on_audio_stream_player_2d_finished"]
+[connection signal="finished" from="Background_audio/AudioStreamPlayer2D3" to="Background_audio" method="_on_audio_stream_player_2d_finished"]

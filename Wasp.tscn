@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dtayi2tc3wqox" path="res://wasp.gd" id="1_gy4hm"]
 [ext_resource type="Texture2D" uid="uid://bp2sq3ykftvcs" path="res://assets/wasp.png" id="2_34ah8"]
 [ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="3_2wqlf"]
+[ext_resource type="Texture2D" uid="uid://b8lf7u77gbdy0" path="res://assets/wasp_entangled.png" id="3_sfiok"]
 [ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="4_34ah8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gy4hm"]
@@ -23,9 +24,9 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("2_34ah8")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_34ah8"]
-atlas = ExtResource("2_34ah8")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlh1q"]
+atlas = ExtResource("3_sfiok")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2wqlf"]
 animations = [{
@@ -48,7 +49,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_34ah8")
+"texture": SubResource("AtlasTexture_rlh1q")
 }],
 "loop": true,
 "name": &"webbed",
