@@ -2,10 +2,15 @@ extends CanvasLayer
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var lives_label = $LivesLabel
+@onready var enemy_label = $EnemyLabel
+var enemies = 0
 
 func _ready() -> void:
 	player.connect("hit", update_lives_label)
 	update_lives_label()
+
+func _process(_delta: float) -> void:
+	enemy_label.text = "Enemies left: " + str(enemies)
 
 func _input(event):
 	if event.is_action_pressed("pause"):
