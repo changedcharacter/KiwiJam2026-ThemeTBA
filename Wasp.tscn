@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://crkf8bcvhi8ek"]
+
+[ext_resource type="Script" path="res://wasp.gd" id="1_gy4hm"]
+[ext_resource type="Texture2D" path="res://assets/wasp.png" id="2_34ah8"]
+[ext_resource type="Script" uid="uid://c1ijdta484g1o" path="res://scripts/entangle_mechanic.gd" id="3_2wqlf"]
+[ext_resource type="Texture2D" uid="uid://b3e6juquxyqls" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="4_34ah8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gy4hm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqm7v"]
+atlas = ExtResource("2_34ah8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isjc6"]
+atlas = ExtResource("2_34ah8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlb6i"]
+atlas = ExtResource("2_34ah8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1db5p"]
+atlas = ExtResource("2_34ah8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2wqlf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqm7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isjc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlb6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1db5p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2wqlf"]
+radius = 307.05862
+
+[sub_resource type="Gradient" id="Gradient_2wqlf"]
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_34ah8"]
+gradient = SubResource("Gradient_2wqlf")
+fill = 1
+fill_from = Vector2(0.53999996, 0.63)
+fill_to = Vector2(0.53, 0.98999995)
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfiok"]
+atlas = ExtResource("4_34ah8")
+region = Rect2(188.78871, 156.91856, 22.294632, 22.031052)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngm3t"]
+atlas = ExtResource("4_34ah8")
+region = Rect2(188.95801, 252.95949, 22.135132, 22.031052)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=549920511 node_paths=PackedStringArray("nav_agent")]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_gy4hm")
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=772334039]
+shape = SubResource("CircleShape2D_gy4hm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=478589221]
+sprite_frames = SubResource("SpriteFrames_2wqlf")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1520539602]
+path_desired_distance = 98.05
+target_desired_distance = 1000.0
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="NavigationAgent2D" unique_id=1309267369]
+wait_time = 0.3
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=822614823]
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1370903227]
+shape = SubResource("CircleShape2D_2wqlf")
+
+[node name="Entangle_Mechanic" type="Node2D" parent="." unique_id=1504147773]
+script = ExtResource("3_2wqlf")
+
+[node name="RayCast2DUp" type="RayCast2D" parent="Entangle_Mechanic" unique_id=69947327]
+target_position = Vector2(0, -150)
+
+[node name="RayCast2DDown" type="RayCast2D" parent="Entangle_Mechanic" unique_id=768906842]
+target_position = Vector2(0, 150)
+
+[node name="PointLight2D" type="PointLight2D" parent="Entangle_Mechanic" unique_id=1439060379]
+position = Vector2(-2.5000048, -28)
+scale = Vector2(1.4531249, 1.5625)
+energy = 1.5
+texture = SubResource("GradientTexture2D_34ah8")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Entangle_Mechanic" unique_id=50563249]
+position = Vector2(-3.5000038, -6.000003)
+scale = Vector2(1.4531249, 1.5625)
+energy = 1.5
+texture = SubResource("GradientTexture2D_34ah8")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=593809750]
+offset_left = -11.0
+offset_top = -33.0
+offset_right = 11.0
+offset_bottom = -11.0
+texture_under = SubResource("AtlasTexture_sfiok")
+texture_progress = SubResource("AtlasTexture_ngm3t")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
