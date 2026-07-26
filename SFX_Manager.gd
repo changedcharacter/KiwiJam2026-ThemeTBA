@@ -29,4 +29,4 @@ func play_sound_effect_from_dictionary(_tag: String)->void:
 
 
 func update_position(node: Node2D):
-	position = node.position
+	position = Global.current_player.position
