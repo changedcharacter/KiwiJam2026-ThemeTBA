@@ -4,7 +4,8 @@ const accel = 300
 const speed = 300
 @export var nav_agent: NavigationAgent2D
 @onready var sprite = $AnimatedSprite2D
-
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var hud = get_tree().get_first_node_in_group("hud")
 
 enum States {
 	ALIVE,
@@ -21,6 +22,7 @@ func _ready() -> void:
 	home_pos = self.global_position
 	nav_agent.path_desired_distance = 4
 	nav_agent.target_desired_distance = 4
+	hud.enemies += 1
 
 func _physics_process(delta: float) -> void:
 	if current_state != States.DEAD:
@@ -41,17 +43,9 @@ func recalc_path():
 	else:
 		nav_agent.target_position = home_pos
 
-
-
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(area.owner)
-	print(Global.current_player)
-	if area.owner == Global.current_player:
+	if area.owner == player:
 		target = area.owner
-
-	pass # Replace with function body.
-
 
 func _on_timer_timeout() -> void:
 	
@@ -59,11 +53,12 @@ func _on_timer_timeout() -> void:
 	pass # Replace with function body.
 	
 func die():
-	$Entangle_Mechanic/PointLight2D.queue_free()
-	$Entangle_Mechanic/PointLight2D2.queue_free()
-	sprite.play("webbed")
+	hud.enemies -= 1
 	current_state = States.DEAD
 	$TextureProgressBar.queue_free()
-	
-	
-	pass
+	$Entangle_Mechanic.queue_free()
+	$Hitbox.queue_free()
+	$DeathTimer.start()
+
+func _on_death_timer_timeout() -> void:
+	sprite.play("webbed")

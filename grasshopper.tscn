@@ -177,11 +177,11 @@ texture_under = SubResource("AtlasTexture_53n4j")
 texture_progress = SubResource("AtlasTexture_cgqaa")
 metadata/_edit_use_anchors_ = true
 
-[node name="Area2D" type="Area2D" parent="." unique_id=861435513]
+[node name="Hitbox" type="Area2D" parent="." unique_id=861435513]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1501734230]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1501734230]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_24n67")
 
