@@ -54,6 +54,7 @@ func _on_timer_timeout() -> void:
 	pass # Replace with function body.
 	
 func die():
+	SFX_Manager.play_sound_effect_from_dictionary("paper_scrunch")
 	hud.enemies -= 1
 	current_state = States.DEAD
 	$TextureProgressBar.queue_free()

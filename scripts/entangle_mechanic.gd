@@ -39,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 		
 func count_loop():
 	if progress and player:
+		SFX_Manager.play_sound_effect_from_dictionary("clothing_thud")
 		progress.value += 20
 		loop_count += 1
 		if progress.value == 100:
