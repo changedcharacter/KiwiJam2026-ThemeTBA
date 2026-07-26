@@ -45,7 +45,8 @@ func recalc_path():
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-
+	print(area.owner)
+	print(Global.current_player)
 	if area.owner == Global.current_player:
 		target = area.owner
 
@@ -53,7 +54,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func _on_timer_timeout() -> void:
-
+	
 	recalc_path()
 	pass # Replace with function body.
 	

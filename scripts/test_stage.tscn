@@ -1212,7 +1212,7 @@ position = Vector2(240, 408)
 [node name="Grasshopper" parent="." unique_id=1880106891 instance=ExtResource("10_hp1qi")]
 position = Vector2(2466, 408)
 
-[node name="CharacterBody2D" parent="." unique_id=549920511 instance=ExtResource("7_r11g4")]
+[node name="Wasp" parent="." unique_id=549920511 instance=ExtResource("7_r11g4")]
 position = Vector2(-110, -110)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1965154179]
