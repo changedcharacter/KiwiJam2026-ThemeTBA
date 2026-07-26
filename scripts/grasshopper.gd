@@ -23,8 +23,8 @@ const max_fall_velocity: float = 200.0
 
 @export var can_move = true
 
-@onready var right_bounds = self.position + Vector2(150,0)
-@onready var left_bounds = self.position + Vector2(-150,0)
+@onready var right_bounds = self.position + Vector2(75,0)
+@onready var left_bounds = self.position + Vector2(-75,0)
 
 
 @onready var direction = Vector2.RIGHT
