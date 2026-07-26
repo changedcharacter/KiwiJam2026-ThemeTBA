@@ -99,7 +99,6 @@ animation = &"webbed"
 path_desired_distance = 98.05
 target_desired_distance = 1000.0
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="NavigationAgent2D" unique_id=1309267369]
 wait_time = 0.3
